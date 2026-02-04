@@ -6,6 +6,12 @@ export default function HeroSection() {
     return (
         <section className="relative flex min-h-[90vh] flex-col items-center justify-center pt-20 px-6 text-center">
             <div className="max-w-5xl space-y-10 relative z-10">
+                {/* Landing Page Gratis Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-charcoal/10 border border-charcoal/20">
+                    <span className="material-symbols-outlined text-lg text-charcoal">workspace_premium</span>
+                    <span className="text-sm font-bold uppercase tracking-widest text-charcoal">Landing Page Gratis</span>
+                </div>
+
                 <h1 className="font-serif text-5xl md:text-8xl leading-[1.1] tracking-tight text-charcoal">
                     Tu <span className="italic font-normal">Dominio</span> Profesional.
                 </h1>

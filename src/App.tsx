@@ -1,23 +1,22 @@
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import ServicesSection from './components/ServicesSection';
-import CuratedAssetsSection from './components/CuratedAssetsSection';
-import FAQSection from './components/FAQSection';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import DominiosPage from './pages/DominiosPage';
+import PreciosPage from './pages/PreciosPage';
+import FAQPage from './pages/FAQPage';
 import './App.css';
 
 function App() {
   return (
-    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light font-display text-charcoal antialiased">
-      <Header />
-      <main className="flex-1">
-        <HeroSection />
-        <ServicesSection />
-        <CuratedAssetsSection />
-        <FAQSection />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-background-light font-display text-charcoal antialiased">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/dominios" element={<DominiosPage />} />
+          <Route path="/precios" element={<PreciosPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

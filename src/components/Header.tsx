@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
     return (
         <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 bg-background-light/80 backdrop-blur-md px-6 md:px-20 py-4">
             <div className="mx-auto flex max-w-[1440px] items-center justify-between">
-                <div className="flex items-center gap-3">
+                <Link to="/" className="flex items-center gap-3">
                     <div className="size-6 text-charcoal">
                         <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -12,17 +14,17 @@ export default function Header() {
                         </svg>
                     </div>
                     <h2 className="text-charcoal text-lg font-bold tracking-tight uppercase">eirl.pe</h2>
-                </div>
+                </Link>
                 <nav className="hidden md:flex items-center gap-12">
-                    <a className="text-charcoal/70 hover:text-charcoal text-xs font-semibold tracking-widest uppercase transition-colors" href="#">
+                    <Link to="/dominios" className="text-charcoal/70 hover:text-charcoal text-xs font-semibold tracking-widest uppercase transition-colors">
                         Dominios
-                    </a>
-                    <a className="text-charcoal/70 hover:text-charcoal text-xs font-semibold tracking-widest uppercase transition-colors" href="#">
+                    </Link>
+                    <Link to="/precios" className="text-charcoal/70 hover:text-charcoal text-xs font-semibold tracking-widest uppercase transition-colors">
                         Precios
-                    </a>
-                    <a className="text-charcoal/70 hover:text-charcoal text-xs font-semibold tracking-widest uppercase transition-colors" href="#">
+                    </Link>
+                    <Link to="/faq" className="text-charcoal/70 hover:text-charcoal text-xs font-semibold tracking-widest uppercase transition-colors">
                         FAQ
-                    </a>
+                    </Link>
                     <button className="flex min-w-[120px] items-center justify-center rounded-full h-11 px-6 bg-charcoal text-primary text-xs font-bold tracking-[0.1em] uppercase transition-transform active:scale-95">
                         Comenzar
                     </button>
