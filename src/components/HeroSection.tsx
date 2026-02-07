@@ -6,10 +6,10 @@ export default function HeroSection() {
     return (
         <section className="relative flex min-h-[90vh] flex-col items-center justify-center pt-20 px-6 text-center">
             <div className="max-w-5xl space-y-10 relative z-10">
-                {/* Landing Page Gratis Badge */}
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-charcoal/10 border border-charcoal/20">
-                    <span className="material-symbols-outlined text-lg text-charcoal">workspace_premium</span>
-                    <span className="text-sm font-bold uppercase tracking-widest text-charcoal">Landing Page Gratis</span>
+                {/* Sitio Web Gratis Badge */}
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/30 to-primary/20 border border-charcoal/10 shadow-sm">
+                    <div className="w-2 h-2 rounded-full bg-charcoal/50"></div>
+                    <span className="text-sm font-semibold tracking-wide text-charcoal/80">Sitio Web Gratis</span>
                 </div>
 
                 <h1 className="font-serif text-5xl md:text-8xl leading-[1.1] tracking-tight text-charcoal">
@@ -48,16 +48,6 @@ export default function HeroSection() {
                         <span className="px-3 py-1 rounded-full border border-charcoal/10 text-xs text-muted-beige bg-white/50">arquitectura.eirl.pe</span>
                     </div>
                 </div>
-            </div>
-            {/* Abstract Visual */}
-            <div className="absolute inset-0 z-0 opacity-40 overflow-hidden pointer-events-none">
-                <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-full bg-center bg-no-repeat bg-cover grayscale"
-                    style={{
-                        backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAtJxc3supoIybm44diuawSp7AyPJR6HnVkY3zSQMmcVSAcTS0VdTNRqBgyElDhG8HCOsdrZ-eUbSSF-l1NJ5KJvJm_xYSOqOYdA2ouw1h5EC6rj_aguD78GCAL4sSJ0HApfAQ8qUlYLl0UL7OqySpHYCsTOZnKH_dy2-5b-Zdp6ere2ikaOoESDQL3v4PcDh4UeFGgHJjkRkpN46cFw5iHxlDYhynAiOm6v5M68VwV265FVx5Zqikw77fgHG1TWstOwuU_NrCW7Bg")'
-                    }}
-                />
-                <div className="absolute inset-0 hero-gradient" />
             </div>
         </section>
     );

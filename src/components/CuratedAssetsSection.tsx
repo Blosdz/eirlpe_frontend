@@ -25,7 +25,7 @@ export default function CuratedAssetsSection() {
     ];
 
     return (
-        <section className="py-24 px-6 md:px-20 bg-primary">
+        <section className="py-24 px-6 md:px-20 bg-primary/92 backdrop-blur-[2px]">
             <div className="mx-auto max-w-[1440px]">
                 <div className="flex justify-between items-center mb-16">
                     <h2 className="font-serif text-4xl text-charcoal">Dominios Destacados</h2>

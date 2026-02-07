@@ -1,22 +1,20 @@
 interface ServiceCardProps {
-    icon: string;
+    number: string;
     title: string;
     description: string;
 }
 
-export default function ServiceCard({ icon, title, description }: ServiceCardProps) {
+export default function ServiceCard({ number, title, description }: ServiceCardProps) {
     return (
-        <div className="group space-y-6 p-8 rounded-2xl border border-border-beige bg-white hover:border-charcoal/20 transition-all duration-500">
-            <div className="size-14 rounded-full bg-primary flex items-center justify-center text-charcoal group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-3xl">{icon}</span>
+        <article className="group relative flex gap-5 p-6 md:p-8 rounded-2xl bg-white/70 border border-border-beige/80 hover:bg-white hover:border-charcoal/15 hover:shadow-lg hover:shadow-charcoal/5 transition-all duration-300">
+            {/* Barra de acento */}
+            <div className="w-0.5 shrink-0 self-stretch rounded-full bg-charcoal/15 group-hover:bg-charcoal/30 transition-colors" />
+
+            <div className="flex-1 min-w-0">
+                <span className="font-serif text-2xl text-charcoal/30 tabular-nums">{number}</span>
+                <h4 className="mt-2 text-lg md:text-xl font-bold text-charcoal tracking-tight">{title}</h4>
+                <p className="mt-3 text-muted-beige text-[15px] leading-relaxed">{description}</p>
             </div>
-            <div className="space-y-3">
-                <h4 className="text-xl font-bold text-charcoal">{title}</h4>
-                <p className="text-muted-beige leading-relaxed">{description}</p>
-            </div>
-            <div className="pt-4 flex items-center text-charcoal font-bold text-sm tracking-widest uppercase gap-2 cursor-pointer group-hover:gap-4 transition-all">
-                Learn More <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </div>
-        </div>
+        </article>
     );
 }

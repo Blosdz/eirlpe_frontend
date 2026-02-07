@@ -1,6 +1,6 @@
 export default function FAQPage() {
     return (
-        <div className="min-h-screen bg-background-light font-display text-charcoal">
+        <div className="min-h-screen bg-background-light/90 backdrop-blur-[2px] font-display text-charcoal">
             <div className="pt-32 px-6">
                 <div className="max-w-4xl mx-auto text-center space-y-8">
                     <h1 className="font-serif text-5xl md:text-7xl text-charcoal">Preguntas Frecuentes</h1>

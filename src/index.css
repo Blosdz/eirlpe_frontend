@@ -12,4 +12,14 @@
   .hero-gradient {
     background: linear-gradient(180deg, rgba(245, 245, 219, 0) 0%, rgba(245, 245, 219, 1) 100%);
   }
+  .hero-bg-float {
+    animation: hero-bg-float 25s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-bg-float {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(2%, 1%); }
+  50% { transform: translate(-1%, 2%); }
+  75% { transform: translate(1%, -1%); }
 }
