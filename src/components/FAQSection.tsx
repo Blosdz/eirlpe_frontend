@@ -9,20 +9,20 @@ function FAQItem({ question, answer }: FAQItemProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="border-b border-border-beige">
+        <div className="border-b border-border-beige dark:border-primary/20 transition-colors duration-500">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-6 flex justify-between items-center text-left group hover:bg-primary/10 px-4 rounded-lg transition-colors"
+                className="w-full py-5 sm:py-6 md:py-8 flex justify-between items-center text-left group hover:bg-primary/10 dark:hover:bg-primary/5 px-4 sm:px-6 rounded-lg transition-colors duration-300"
             >
-                <h3 className="text-lg md:text-xl font-bold text-charcoal pr-8">{question}</h3>
-                <span className={`material-symbols-outlined text-charcoal transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-charcoal dark:text-primary pr-8">{question}</h3>
+                <span className={`material-symbols-outlined text-2xl sm:text-3xl text-charcoal dark:text-primary transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
                     expand_more
                 </span>
             </button>
             <div
-                className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 pb-6' : 'max-h-0'}`}
+                className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[28rem] sm:max-h-96 pb-6 sm:pb-8' : 'max-h-0'}`}
             >
-                <p className="text-muted-beige leading-relaxed px-4">{answer}</p>
+                <p className="text-muted-beige dark:text-primary/70 text-base sm:text-lg md:text-xl leading-relaxed px-4 sm:px-6">{answer}</p>
             </div>
         </div>
     );
@@ -57,18 +57,18 @@ export default function FAQSection() {
     ];
 
     return (
-        <section className="py-32 px-6 md:px-20 bg-background-light/90 backdrop-blur-[2px]">
-            <div className="mx-auto max-w-4xl">
-                <div className="text-center mb-16 space-y-4">
-                    <h3 className="text-charcoal uppercase tracking-[0.2em] text-sm font-bold">Preguntas Frecuentes</h3>
-                    <h2 className="font-serif text-4xl md:text-6xl text-charcoal">
+        <section className="py-20 sm:py-24 md:py-32 lg:py-40 px-6 sm:px-8 md:px-12 lg:px-20 bg-background-light/90 dark:bg-background-dark/80 backdrop-blur-[2px] transition-colors duration-500">
+            <div className="mx-auto max-w-4xl lg:max-w-5xl">
+                <div className="text-center mb-12 sm:mb-16 lg:mb-20 space-y-4 sm:space-y-6">
+                    <h3 className="text-charcoal dark:text-primary/80 uppercase tracking-[0.2em] text-sm sm:text-base font-bold">Preguntas Frecuentes</h3>
+                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-charcoal dark:text-primary">
                         ¿Tienes dudas?
                     </h2>
-                    <p className="text-muted-beige text-lg font-light">
+                    <p className="text-muted-beige dark:text-primary/70 text-lg sm:text-xl md:text-2xl font-light max-w-2xl mx-auto">
                         Aquí respondemos las preguntas más comunes sobre nuestro servicio.
                     </p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 sm:space-y-3">
                     {faqs.map((faq, index) => (
                         <FAQItem key={index} {...faq} />
                     ))}

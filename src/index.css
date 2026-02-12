@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  /* Sin transición de color aquí: el cambio de tema es un crossfade uniforme desde ThemeContext */
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-background-light dark:bg-background-dark;
+  }
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   }

@@ -25,15 +25,15 @@ export default function CuratedAssetsSection() {
     ];
 
     return (
-        <section className="py-24 px-6 md:px-20 bg-primary/92 backdrop-blur-[2px]">
+        <section className="py-20 sm:py-24 md:py-28 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-20 bg-primary/92 dark:bg-charcoal/95 backdrop-blur-[2px] transition-colors duration-500">
             <div className="mx-auto max-w-[1440px]">
-                <div className="flex justify-between items-center mb-16">
-                    <h2 className="font-serif text-4xl text-charcoal">Dominios Destacados</h2>
-                    <a className="text-charcoal border-b border-charcoal font-bold text-sm tracking-widest uppercase pb-1" href="#">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-16 lg:mb-20">
+                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-charcoal dark:text-primary">Dominios Destacados</h2>
+                    <a className="text-charcoal dark:text-primary border-b border-charcoal dark:border-primary font-bold text-sm sm:text-base tracking-widest uppercase pb-1 hover:opacity-80 transition-opacity shrink-0" href="#">
                         Ver Más Dominios
                     </a>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
                     {assets.map((asset, index) => (
                         <AssetCard key={index} {...asset} />
                     ))}
