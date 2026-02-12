@@ -7,6 +7,8 @@ import PreciosPage from './pages/PreciosPage';
 import FAQPage from './pages/FAQPage';
 import TemplateSelectorPage from './pages/TemplateSelectorPage';
 import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import './App.css';
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/templates/:domain" element={<TemplateSelectorPage />} />
               <Route path="/registro/:domain/:template" element={<RegisterPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
             </Routes>
           </div>
         </div>

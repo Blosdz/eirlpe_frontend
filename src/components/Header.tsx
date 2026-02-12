@@ -1,9 +1,24 @@
 import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function Header() {
     const { theme, toggleTheme } = useTheme();
     const isDark = theme === 'dark';
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    // Cerrar dropdown al hacer clic fuera
+    useEffect(() => {
+        if (!menuOpen) return;
+        const handleClick = (e: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setMenuOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClick);
+        return () => document.removeEventListener('mousedown', handleClick);
+    }, [menuOpen]);
 
     return (
         <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 dark:border-charcoal/30 bg-background-light/80 dark:bg-background-dark/90 backdrop-blur-md px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 transition-colors duration-500 ease-in-out">
@@ -45,9 +60,47 @@ export default function Header() {
                             </svg>
                         )}
                     </button>
-                    <button className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-charcoal dark:bg-primary text-primary dark:text-charcoal text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 hover:opacity-90">
-                        Comenzar
-                    </button>
+
+                    {/* Dropdown Comenzar */}
+                    <div ref={menuRef} className="relative">
+                        <button
+                            onClick={() => setMenuOpen(!menuOpen)}
+                            className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center gap-2 rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-charcoal dark:bg-primary text-primary dark:text-charcoal text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 hover:opacity-90"
+                        >
+                            Comenzar
+                            <span className={`material-symbols-outlined text-lg transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}>
+                                expand_more
+                            </span>
+                        </button>
+                        {/* Dropdown */}
+                        <div className={`absolute right-0 top-full mt-3 w-56 rounded-2xl border border-charcoal/10 dark:border-primary/15 bg-white dark:bg-background-dark shadow-xl shadow-charcoal/10 dark:shadow-black/30 overflow-hidden transition-all duration-200 origin-top-right ${
+                            menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+                        }`}>
+                            <Link
+                                to="/login"
+                                onClick={() => setMenuOpen(false)}
+                                className="flex items-center gap-3 px-5 py-4 hover:bg-charcoal/5 dark:hover:bg-primary/5 transition-colors"
+                            >
+                                <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/50">login</span>
+                                <div>
+                                    <p className="text-sm font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
+                                    <p className="text-xs text-muted-beige dark:text-primary/40">Ya tengo una cuenta</p>
+                                </div>
+                            </Link>
+                            <div className="h-px bg-charcoal/5 dark:bg-primary/10 mx-4" />
+                            <Link
+                                to="/signup"
+                                onClick={() => setMenuOpen(false)}
+                                className="flex items-center gap-3 px-5 py-4 hover:bg-charcoal/5 dark:hover:bg-primary/5 transition-colors"
+                            >
+                                <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/50">person_add</span>
+                                <div>
+                                    <p className="text-sm font-bold text-charcoal dark:text-primary">Registrarse</p>
+                                    <p className="text-xs text-muted-beige dark:text-primary/40">Crear cuenta nueva</p>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
                 </nav>
                 <div className="flex md:hidden items-center gap-3 sm:gap-4">
                     <button
@@ -66,9 +119,14 @@ export default function Header() {
                             </svg>
                         )}
                     </button>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-charcoal dark:text-primary size-8 sm:size-9 transition-colors duration-500">
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                    </svg>
+                    <Link
+                        to="/login"
+                        className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-charcoal/40 text-charcoal dark:text-primary transition-all duration-500"
+                        aria-label="Iniciar sesion"
+                    >
+                        <span className="material-symbols-outlined text-2xl">person</span>
+                    </Link>
+                    <span className="material-symbols-outlined text-charcoal dark:text-primary text-3xl sm:text-4xl transition-colors duration-500">menu</span>
                 </div>
             </div>
         </header>
