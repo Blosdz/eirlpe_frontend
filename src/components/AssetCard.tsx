@@ -6,7 +6,7 @@ interface AssetCardProps {
 
 export default function AssetCard({ imageUrl, category, domain }: AssetCardProps) {
     return (
-        <div className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer relative bg-white dark:bg-charcoal/50 border border-charcoal/5 dark:border-primary/15 transition-colors duration-500">
+        <div className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer relative bg-white border border-charcoal/5 transition-colors duration-500">
             <div
                 className="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 style={{ backgroundImage: `url("${imageUrl}")` }}

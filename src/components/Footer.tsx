@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-charcoal dark:bg-charcoal text-primary pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 px-6 sm:px-8 md:px-12 lg:px-20 transition-colors duration-500">
+        <footer className="bg-charcoal text-primary pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 px-6 sm:px-8 md:px-12 lg:px-20 transition-colors duration-500">
             <div className="mx-auto max-w-[1440px] grid grid-cols-1 md:grid-cols-4 gap-12 sm:gap-16 md:gap-10 lg:gap-12">
                 <div className="md:col-span-2 space-y-6 sm:space-y-8 lg:space-y-10">
                     <div className="flex items-center gap-4 sm:gap-5">

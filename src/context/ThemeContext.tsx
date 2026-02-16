@@ -3,8 +3,8 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 const STORAGE_KEY = 'eirlpe-theme';
 
 const THEME_BG = {
-    light: '#f8f8f6',
-    dark: '#1f1f13',
+    light: '#F5F3FF',
+    dark: '#1E1940',
 } as const;
 
 type Theme = 'light' | 'dark';

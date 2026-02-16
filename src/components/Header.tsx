@@ -6,7 +6,7 @@ export default function Header() {
     const isDark = theme === 'dark';
 
     return (
-        <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 dark:border-charcoal/30 bg-background-light/80 dark:bg-background-dark/90 backdrop-blur-md px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 transition-colors duration-500 ease-in-out">
+        <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 dark:border-accent/15 bg-background-light/80 dark:bg-background-dark/90 backdrop-blur-md px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 transition-colors duration-500 ease-in-out">
             <div className="mx-auto flex max-w-[1440px] items-center justify-between">
                 <Link to="/" className="flex items-center gap-3 sm:gap-4">
                     <div className="size-7 sm:size-8 md:size-10 text-charcoal dark:text-primary transition-colors duration-500 shrink-0">
@@ -32,7 +32,7 @@ export default function Header() {
                     <button
                         type="button"
                         onClick={(e) => toggleTheme({ clientX: e.clientX, clientY: e.clientY })}
-                        className="flex items-center justify-center size-12 lg:size-14 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-charcoal/40 hover:bg-charcoal/5 dark:hover:bg-charcoal/60 text-charcoal dark:text-primary transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-charcoal/20 dark:focus:ring-primary/30 active:scale-95"
+                        className="flex items-center justify-center size-12 lg:size-14 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-background-dark/60 hover:bg-accent/5 dark:hover:bg-accent/20 text-charcoal dark:text-primary transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-accent/20 dark:focus:ring-accent-light/30 active:scale-95"
                         aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
                     >
                         {isDark ? (
@@ -45,7 +45,7 @@ export default function Header() {
                             </svg>
                         )}
                     </button>
-                    <button className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-charcoal dark:bg-primary text-primary dark:text-charcoal text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 hover:opacity-90">
+                    <button className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-accent dark:bg-accent-light text-white text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 hover:opacity-90 shadow-lg shadow-accent/25">
                         Comenzar
                     </button>
                 </nav>
@@ -53,7 +53,7 @@ export default function Header() {
                     <button
                         type="button"
                         onClick={(e) => toggleTheme({ clientX: e.clientX, clientY: e.clientY })}
-                        className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-charcoal/40 text-charcoal dark:text-primary transition-all duration-500"
+                        className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-background-dark/60 text-charcoal dark:text-primary transition-all duration-500"
                         aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
                     >
                         {isDark ? (
