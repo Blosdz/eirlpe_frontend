@@ -5,12 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#f5f5db',
-        'background-light': '#f8f8f6',
-        'background-dark': '#1f1f13',
-        'charcoal': '#171712',
-        'muted-beige': '#828268',
-        'border-beige': '#e4e4dd'
+        'primary': '#E8E3F9',
+        'background-light': '#F5F3FF',
+        'background-dark': '#1E1940',
+        'charcoal': '#312773',
+        'muted-beige': '#7B6FA0',
+        'border-beige': '#D4CEF0',
+        'accent': '#5B44F2',
+        'accent-light': '#8466F2',
+        'accent-deep': '#3A29A6',
       },
       fontFamily: {
         'display': ['Manrope', 'sans-serif'],

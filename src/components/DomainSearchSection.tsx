@@ -4,7 +4,7 @@ export default function DomainSearchSection() {
     const [searchValue, setSearchValue] = useState('');
 
     return (
-        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-primary/20 dark:bg-charcoal/40 transition-colors duration-500">
+        <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-primary/20 dark:bg-charcoal/30 transition-colors duration-500">
             <div className="mx-auto max-w-4xl text-center space-y-8 sm:space-y-10">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-charcoal dark:text-primary transition-colors duration-500">
                     Encuentra tu dominio perfecto.

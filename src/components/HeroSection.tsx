@@ -80,7 +80,7 @@ export default function HeroSection() {
                     {/* Badge */}
                     <div className="flex justify-center">
                         <div className="relative inline-flex items-center px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full border border-charcoal/15 dark:border-primary/20 cursor-default overflow-hidden">
-                            <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-charcoal/[0.04] dark:via-primary/[0.08] to-transparent" />
+                            <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-accent/[0.06] dark:via-accent-light/[0.10] to-transparent" />
                             <span className="relative text-[11px] sm:text-xs md:text-sm lg:text-base font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-charcoal/70 dark:text-primary/70">
                                 Landing Page <span className="font-serif italic tracking-normal normal-case text-charcoal dark:text-primary">Gratis</span>
                             </span>
@@ -97,7 +97,7 @@ export default function HeroSection() {
                     {/* Search bar */}
                     <div className="pt-4 sm:pt-6 md:pt-8">
                         <div className="w-full max-w-3xl sm:max-w-4xl mx-auto">
-                            <div className="border-2 border-charcoal/20 dark:border-primary/30 focus-within:border-charcoal dark:focus-within:border-primary rounded-2xl sm:rounded-full transition-all duration-500 bg-white/80 dark:bg-charcoal/40 backdrop-blur-sm shadow-xl overflow-hidden">
+                            <div className="border-2 border-charcoal/20 dark:border-primary/30 focus-within:border-accent dark:focus-within:border-accent-light rounded-2xl sm:rounded-full transition-all duration-500 bg-white/80 dark:bg-charcoal/40 backdrop-blur-sm shadow-xl overflow-hidden">
                                 <div className="flex items-center px-4 sm:px-5 md:px-8 py-3.5 sm:py-4 md:py-5">
                                     <div className="text-charcoal/40 dark:text-primary/50 flex items-center justify-center pr-2 sm:pr-3 md:pr-4">
                                         <span className="material-symbols-outlined text-xl sm:text-2xl md:text-3xl lg:text-4xl">search</span>
@@ -118,7 +118,7 @@ export default function HeroSection() {
                                     <button
                                         onClick={handleSearch}
                                         disabled={!!transitionDomain || !searchValue.trim()}
-                                        className="hidden sm:block ml-3 md:ml-6 px-5 md:px-8 py-2.5 md:py-3 bg-charcoal dark:bg-primary text-primary dark:text-charcoal rounded-full font-bold text-sm md:text-base tracking-wider uppercase hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+                                        className="hidden sm:block ml-3 md:ml-6 px-5 md:px-8 py-2.5 md:py-3 bg-accent dark:bg-accent-light text-white rounded-full font-bold text-sm md:text-base tracking-wider uppercase hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed shrink-0 shadow-lg shadow-accent/25"
                                     >
                                         Buscar
                                     </button>
@@ -127,7 +127,7 @@ export default function HeroSection() {
                                     <button
                                         onClick={handleSearch}
                                         disabled={!!transitionDomain || !searchValue.trim()}
-                                        className="w-full py-3 bg-charcoal dark:bg-primary text-primary dark:text-charcoal rounded-xl font-bold text-sm tracking-wider uppercase hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                                        className="w-full py-3 bg-accent dark:bg-accent-light text-white rounded-xl font-bold text-sm tracking-wider uppercase hover:opacity-90 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-accent/25"
                                     >
                                         Buscar dominio
                                     </button>
@@ -140,7 +140,7 @@ export default function HeroSection() {
                                     key={name}
                                     onClick={() => startSearch(name)}
                                     disabled={!!transitionDomain}
-                                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-charcoal/10 dark:border-primary/20 text-xs sm:text-sm md:text-base text-muted-beige dark:text-primary/70 bg-white/50 dark:bg-charcoal/30 transition-colors duration-500 hover:border-charcoal/30 dark:hover:border-primary/40 hover:text-charcoal dark:hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-charcoal/10 dark:border-primary/20 text-xs sm:text-sm md:text-base text-muted-beige dark:text-primary/70 bg-white/50 dark:bg-charcoal/30 transition-colors duration-500 hover:border-accent/40 dark:hover:border-accent-light/50 hover:text-accent dark:hover:text-accent-light disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {name}.eirl.pe
                                 </button>

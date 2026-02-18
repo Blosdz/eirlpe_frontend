@@ -15,7 +15,7 @@ function App() {
   return (
     <ParallaxProvider>
       <Router>
-        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden font-display text-charcoal dark:text-primary antialiased transition-colors duration-500 ease-in-out">
+        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden font-display text-charcoal antialiased transition-colors duration-500 ease-in-out">
           <FullPageParallaxBackground />
           <div className="relative z-10 flex min-h-screen w-full flex-col bg-transparent transition-colors duration-500 ease-in-out">
             <Routes>
