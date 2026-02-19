@@ -14,13 +14,13 @@ export default function FullPageParallaxBackground() {
     const trianglesLayer2 = useParallax<HTMLDivElement>({ speed: 25 });
     return (
         <div
-            className="fixed inset-0 z-0 overflow-hidden pointer-events-none text-charcoal transition-colors duration-500"
+            className="fixed inset-0 z-0 overflow-hidden pointer-events-none text-charcoal/90 dark:text-primary/40 transition-colors duration-500"
             aria-hidden
         >
-            {/* Patrón de puntos (rápido) */}
+            {/* Patrón de puntos (rápido) - suave */}
             <div
                 ref={dotsFast.ref}
-                className="absolute -top-[30%] -left-[30%] w-[160%] h-[160%] opacity-[0.24][0.18]"
+                className="absolute -top-[30%] -left-[30%] w-[160%] h-[160%] opacity-[0.06] dark:opacity-[0.08]"
                 style={{ willChange: 'transform' }}
             >
                 <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ export default function FullPageParallaxBackground() {
             {/* Patrón de puntos (lento) - profundidad */}
             <div
                 ref={dotsSlow.ref}
-                className="absolute -top-[25%] -left-[25%] w-[150%] h-[150%] opacity-[0.14]"
+                className="absolute -top-[25%] -left-[25%] w-[150%] h-[150%] opacity-[0.04] dark:opacity-[0.06]"
                 style={{ willChange: 'transform' }}
             >
                 <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@ export default function FullPageParallaxBackground() {
             {/* Líneas (cuadrícula) */}
             <div
                 ref={linesLayer.ref}
-                className="absolute -top-[30%] -left-[30%] w-[160%] h-[160%] opacity-[0.14]"
+                className="absolute -top-[30%] -left-[30%] w-[160%] h-[160%] opacity-[0.04] dark:opacity-[0.06]"
                 style={{ willChange: 'transform' }}
             >
                 <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@ export default function FullPageParallaxBackground() {
             </div>
 
             {/* Velado suave para que el texto siga legible */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background-light/40 via-background-light/5 to-background-light/40 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background-light/40 via-background-light/5 to-background-light/40 dark:from-background-dark/40 dark:via-background-dark/5 dark:to-background-dark/40 transition-colors duration-500" />
         </div>
     );
 }

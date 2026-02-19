@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-charcoal text-primary pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 px-6 sm:px-8 md:px-12 lg:px-20 transition-colors duration-500">
+        <footer className="bg-charcoal dark:!bg-[rgba(7,5,26,0.97)] text-primary dark:text-primary-bright pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 px-6 sm:px-8 md:px-12 lg:px-20 transition-colors duration-500">
             <div className="mx-auto max-w-[1440px] grid grid-cols-1 md:grid-cols-4 gap-12 sm:gap-16 md:gap-10 lg:gap-12">
                 <div className="md:col-span-2 space-y-6 sm:space-y-8 lg:space-y-10">
                     <div className="flex items-center gap-4 sm:gap-5">
@@ -14,31 +14,31 @@ export default function Footer() {
                         </div>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase">eirl.pe</h2>
                     </div>
-                    <p className="text-primary/50 text-xl sm:text-2xl font-serif max-w-sm md:max-w-md leading-relaxed">
+                    <p className="text-primary/50 dark:text-primary-bright/90 text-xl sm:text-2xl font-serif max-w-sm md:max-w-md leading-relaxed">
                         Tu dominio profesional a un clic de distancia.
                     </p>
                     <div className="flex flex-wrap gap-6 sm:gap-8">
-                        <a className="text-primary/50 hover:text-primary transition-colors uppercase tracking-[0.2em] text-sm sm:text-base font-bold" href="#">
+                        <a className="text-primary/50 dark:text-primary-bright/90 hover:text-primary dark:hover:text-primary-bright transition-colors uppercase tracking-[0.2em] text-sm sm:text-base font-bold" href="#">
                             Twitter
                         </a>
-                        <a className="text-primary/50 hover:text-primary transition-colors uppercase tracking-[0.2em] text-sm sm:text-base font-bold" href="#">
+                        <a className="text-primary/50 dark:text-primary-bright/90 hover:text-primary dark:hover:text-primary-bright transition-colors uppercase tracking-[0.2em] text-sm sm:text-base font-bold" href="#">
                             Instagram
                         </a>
-                        <a className="text-primary/50 hover:text-primary transition-colors uppercase tracking-[0.2em] text-sm sm:text-base font-bold" href="#">
+                        <a className="text-primary/50 dark:text-primary-bright/90 hover:text-primary dark:hover:text-primary-bright transition-colors uppercase tracking-[0.2em] text-sm sm:text-base font-bold" href="#">
                             LinkedIn
                         </a>
                     </div>
                 </div>
                 <div className="space-y-4 sm:space-y-6">
-                    <h5 className="uppercase tracking-widest text-sm font-bold text-primary/30">Oficina</h5>
-                    <p className="text-base sm:text-lg leading-relaxed text-primary/70">
+                    <h5 className="uppercase tracking-widest text-sm font-bold text-primary/30 dark:text-primary-bright/70">Oficina</h5>
+                    <p className="text-base sm:text-lg leading-relaxed text-primary/70 dark:text-primary-bright/95">
                         Av. José Larco 1232<br />
                         Miraflores, Lima<br /><br />
                         contacto@eirl.pe
                     </p>
                 </div>
                 <div className="space-y-4 sm:space-y-6">
-                    <h5 className="uppercase tracking-widest text-sm font-bold text-primary/30">Enlaces</h5>
+                    <h5 className="uppercase tracking-widest text-sm font-bold text-primary/30 dark:text-primary-bright/70">Enlaces</h5>
                     <nav className="flex flex-col gap-3 sm:gap-4 text-base sm:text-lg font-bold uppercase tracking-widest">
                         <a className="hover:underline" href="#">Contacto</a>
                         <a className="hover:underline" href="#">Soporte</a>
@@ -47,7 +47,7 @@ export default function Footer() {
                     </nav>
                 </div>
             </div>
-            <div className="mt-20 sm:mt-24 md:mt-32 pt-8 sm:pt-10 md:pt-12 border-t border-primary/10 mx-auto max-w-[1440px] flex flex-col md:flex-row justify-between items-center gap-4 px-6 sm:px-8 md:px-12 lg:px-20 text-xs sm:text-sm uppercase tracking-[0.3em] font-bold text-primary/30">
+            <div className="mt-20 sm:mt-24 md:mt-32 pt-8 sm:pt-10 md:pt-12 border-t border-primary/10 dark:border-primary-bright/20 mx-auto max-w-[1440px] flex flex-col md:flex-row justify-between items-center gap-4 px-6 sm:px-8 md:px-12 lg:px-20 text-xs sm:text-sm uppercase tracking-[0.3em] font-bold text-primary/30 dark:text-primary-bright/70">
                 <p>© 2024 eirl.pe. Todos los derechos reservados.</p>
                 <p>Empoderando negocios digitales.</p>
             </div>

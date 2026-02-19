@@ -31,14 +31,14 @@ export default function Header() {
     }, [mobileOpen]);
 
     const navLinks = [
-        { to: '/dominios', label: 'Dominios' },
-        { to: '/precios', label: 'Precios' },
-        { to: '/faq', label: 'FAQ' },
+        { to: '/dominios', hash: 'dominios-destacados', label: 'Dominios' },
+        { to: '/precios', hash: undefined, label: 'Precios' },
+        { to: '/faq', hash: 'preguntas-frecuentes', label: 'FAQ' },
     ];
 
     return (
         <>
-            <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 dark:border-accent/15 bg-background-light/80 dark:bg-background-dark/90 backdrop-blur-md px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 transition-colors duration-500 ease-in-out">
+            <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 dark:border-primary/15 bg-background-light/80 dark:bg-[rgba(7,5,26,0.82)] backdrop-blur-md px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 transition-colors duration-500 ease-in-out">
                 <div className="mx-auto flex max-w-[1440px] items-center justify-between">
                     <Link to="/" className="flex items-center gap-3 sm:gap-4">
                         <div className="size-7 sm:size-8 md:size-10 text-charcoal dark:text-primary transition-colors duration-500 shrink-0">
@@ -54,19 +54,36 @@ export default function Header() {
 
                     {/* Desktop nav */}
                     <nav className="hidden md:flex items-center gap-8 lg:gap-12">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.to}
-                                to={link.to}
-                                className="text-charcoal/70 dark:text-primary/70 hover:text-charcoal dark:hover:text-primary text-sm lg:text-base font-semibold tracking-widest uppercase transition-colors duration-300"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {navLinks.map((link) => {
+                            const linkClass = "relative text-charcoal/70 dark:text-primary/90 hover:text-charcoal dark:hover:text-primary text-sm lg:text-base font-semibold tracking-widest uppercase transition-colors duration-200 after:absolute after:left-0 after:bottom-[-4px] after:h-px after:w-0 after:bg-accent dark:after:bg-accent-light after:transition-[width] after:duration-200 hover:after:w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 rounded-sm";
+                            if (link.hash) {
+                                const href = location.pathname === '/' ? `#${link.hash}` : `/#${link.hash}`;
+                                return (
+                                    <a
+                                        key={link.to}
+                                        href={href}
+                                        className={linkClass}
+                                        onClick={(e) => {
+                                            if (location.pathname === '/') {
+                                                e.preventDefault();
+                                                document.getElementById(link.hash!)?.scrollIntoView({ behavior: 'smooth' });
+                                            }
+                                        }}
+                                    >
+                                        {link.label}
+                                    </a>
+                                );
+                            }
+                            return (
+                                <Link key={link.to} to={link.to} className={linkClass}>
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
                         <button
                             type="button"
                             onClick={(e) => toggleTheme({ clientX: e.clientX, clientY: e.clientY })}
-                            className="flex items-center justify-center size-12 lg:size-14 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-background-dark/60 hover:bg-accent/5 dark:hover:bg-accent/20 text-charcoal dark:text-primary transition-all duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-accent/20 dark:focus:ring-accent-light/30 active:scale-95"
+                            className="flex items-center justify-center size-12 lg:size-14 rounded-full border border-charcoal/15 dark:border-primary/35 bg-background-light dark:bg-background-dark/95 hover:bg-accent/5 dark:hover:bg-accent/20 hover:scale-105 text-charcoal dark:text-primary transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-accent/20 dark:focus:ring-accent-light/30 active:scale-95"
                             aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
                         >
                             {isDark ? (
@@ -84,14 +101,14 @@ export default function Header() {
                         <div ref={menuRef} className="relative">
                             <button
                                 onClick={() => setMenuOpen(!menuOpen)}
-                                className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center gap-2 rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-accent dark:bg-accent-light text-white text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 hover:opacity-90 shadow-lg shadow-accent/25"
+                                className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center gap-2 rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-accent dark:bg-accent-light text-white text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark"
                             >
                                 Comenzar
                                 <span className={`material-symbols-outlined text-lg transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}>
                                     expand_more
                                 </span>
                             </button>
-                            <div className={`absolute right-0 top-full mt-3 w-56 rounded-2xl border border-charcoal/10 dark:border-primary/15 bg-white dark:bg-background-dark shadow-xl shadow-charcoal/10 dark:shadow-black/30 overflow-hidden transition-all duration-200 origin-top-right ${
+                            <div className={`absolute right-0 top-full mt-3 w-56 rounded-2xl border border-charcoal/10 dark:border-primary/30 bg-white dark:bg-surface-dark shadow-xl shadow-charcoal/10 dark:shadow-black/30 overflow-hidden transition-all duration-200 ease-out origin-top-right ${
                                 menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
                             }`}>
                                 <Link
@@ -99,10 +116,10 @@ export default function Header() {
                                     onClick={() => setMenuOpen(false)}
                                     className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
                                 >
-                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/50">login</span>
+                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">login</span>
                                     <div>
                                         <p className="text-sm font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
-                                        <p className="text-xs text-muted-beige dark:text-primary/40">Ya tengo una cuenta</p>
+                                        <p className="text-xs text-muted-beige dark:text-primary/70">Ya tengo una cuenta</p>
                                     </div>
                                 </Link>
                                 <div className="h-px bg-charcoal/5 dark:bg-primary/10 mx-4" />
@@ -111,10 +128,10 @@ export default function Header() {
                                     onClick={() => setMenuOpen(false)}
                                     className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
                                 >
-                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/50">person_add</span>
+                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person_add</span>
                                     <div>
                                         <p className="text-sm font-bold text-charcoal dark:text-primary">Registrarse</p>
-                                        <p className="text-xs text-muted-beige dark:text-primary/40">Crear cuenta nueva</p>
+                                        <p className="text-xs text-muted-beige dark:text-primary/70">Crear cuenta nueva</p>
                                     </div>
                                 </Link>
                             </div>
@@ -126,7 +143,7 @@ export default function Header() {
                         <button
                             type="button"
                             onClick={(e) => toggleTheme({ clientX: e.clientX, clientY: e.clientY })}
-                            className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-background-dark/60 text-charcoal dark:text-primary transition-all duration-500"
+                            className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/35 bg-background-light dark:bg-background-dark/95 text-charcoal dark:text-primary transition-all duration-500"
                             aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
                         >
                             {isDark ? (
@@ -141,7 +158,7 @@ export default function Header() {
                         </button>
                         <Link
                             to="/login"
-                            className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/20 bg-background-light dark:bg-background-dark/60 text-charcoal dark:text-primary transition-all duration-500"
+                            className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/35 bg-background-light dark:bg-background-dark/95 text-charcoal dark:text-primary transition-all duration-500"
                             aria-label="Iniciar sesion"
                         >
                             <span className="material-symbols-outlined text-2xl">person</span>
@@ -170,22 +187,42 @@ export default function Header() {
 
             {/* Mobile menu panel */}
             <div
-                className={`fixed top-0 right-0 z-40 h-full w-[min(80vw,320px)] bg-background-light dark:bg-background-dark border-l border-border-beige/50 dark:border-accent/15 shadow-2xl md:hidden transition-transform duration-300 ease-out ${
+                className={`fixed top-0 right-0 z-40 h-full w-[min(80vw,320px)] bg-background-light dark:bg-background-dark border-l border-border-beige/50 dark:border-primary/25 shadow-2xl md:hidden transition-transform duration-300 ease-out ${
                     mobileOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}
             >
                 <div className="flex flex-col h-full pt-24 pb-8 px-6">
                     <nav className="flex flex-col gap-2">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.to}
-                                to={link.to}
-                                onClick={() => setMobileOpen(false)}
-                                className="flex items-center gap-4 px-4 py-4 rounded-xl text-charcoal dark:text-primary font-semibold text-lg tracking-wide uppercase hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors duration-200"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
+                        {navLinks.map((link) => {
+                            const navItemClass = "flex items-center gap-4 px-4 py-4 rounded-xl text-charcoal dark:text-primary font-semibold text-lg tracking-wide uppercase hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors duration-200";
+                            if (link.hash) {
+                                return (
+                                    <a
+                                        key={link.to}
+                                        href={location.pathname === '/' ? `#${link.hash}` : `/#${link.hash}`}
+                                        onClick={() => {
+                                            setMobileOpen(false);
+                                            if (location.pathname === '/') {
+                                                setTimeout(() => document.getElementById(link.hash!)?.scrollIntoView({ behavior: 'smooth' }), 150);
+                                            }
+                                        }}
+                                        className={navItemClass}
+                                    >
+                                        {link.label}
+                                    </a>
+                                );
+                            }
+                            return (
+                                <Link
+                                    key={link.to}
+                                    to={link.to}
+                                    onClick={() => setMobileOpen(false)}
+                                    className={navItemClass}
+                                >
+                                    {link.label}
+                                </Link>
+                            );
+                        })}
                     </nav>
 
                     <div className="h-px bg-charcoal/10 dark:bg-primary/15 my-6" />
@@ -196,10 +233,10 @@ export default function Header() {
                             onClick={() => setMobileOpen(false)}
                             className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
                         >
-                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/50">login</span>
+                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">login</span>
                             <div>
                                 <p className="text-base font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
-                                <p className="text-xs text-muted-beige dark:text-primary/40">Ya tengo una cuenta</p>
+                                <p className="text-xs text-muted-beige dark:text-primary/70">Ya tengo una cuenta</p>
                             </div>
                         </Link>
                         <Link
@@ -207,10 +244,10 @@ export default function Header() {
                             onClick={() => setMobileOpen(false)}
                             className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
                         >
-                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/50">person_add</span>
+                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person_add</span>
                             <div>
                                 <p className="text-base font-bold text-charcoal dark:text-primary">Registrarse</p>
-                                <p className="text-xs text-muted-beige dark:text-primary/40">Crear cuenta nueva</p>
+                                <p className="text-xs text-muted-beige dark:text-primary/70">Crear cuenta nueva</p>
                             </div>
                         </Link>
                     </div>

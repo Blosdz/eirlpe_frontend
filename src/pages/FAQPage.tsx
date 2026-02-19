@@ -1,12 +1,12 @@
 export default function FAQPage() {
     return (
-        <div className="min-h-screen bg-background-light/90 backdrop-blur-[2px] font-display text-charcoal">
+        <div className="min-h-screen bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-[2px] font-display text-charcoal dark:text-primary transition-colors duration-500">
             <div className="pt-24 sm:pt-28 md:pt-32 px-6 sm:px-8 md:px-12">
                 <div className="max-w-4xl mx-auto text-center space-y-8 sm:space-y-10">
-                    <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-charcoal">Preguntas Frecuentes</h1>
-                    <div className="bg-primary/20 rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 border-2 border-dashed border-charcoal/20">
-                        <p className="text-xl sm:text-2xl md:text-3xl text-muted-beige mb-4 sm:mb-6">🚧 Página en construcción</p>
-                        <p className="text-base sm:text-lg md:text-xl text-muted-beige max-w-xl mx-auto">
+                    <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-charcoal dark:text-primary-bright">Preguntas Frecuentes</h1>
+                    <div className="bg-primary/20 dark:bg-surface-dark/90 rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 border-2 border-dashed border-charcoal/20 dark:border-primary/30">
+                        <p className="text-xl sm:text-2xl md:text-3xl text-muted-beige dark:text-primary-bright mb-4 sm:mb-6">🚧 Página en construcción</p>
+                        <p className="text-base sm:text-lg md:text-xl text-muted-beige dark:text-primary-bright/95 max-w-xl mx-auto">
                             Esta sección está pendiente de completar por el equipo.
                             <br />Aquí se mostrará el FAQ completo con todas las preguntas.
                         </p>

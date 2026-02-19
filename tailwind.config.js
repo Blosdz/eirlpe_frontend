@@ -6,13 +6,15 @@ export default {
     extend: {
       colors: {
         'primary': '#E8E3F9',
+        'primary-bright': '#F2EFFC',
         'background-light': '#F5F3FF',
-        'background-dark': '#1E1940',
+        'background-dark': '#252055',
+        'surface-dark': '#2E2968',
         'charcoal': '#312773',
         'muted-beige': '#7B6FA0',
         'border-beige': '#D4CEF0',
         'accent': '#5B44F2',
-        'accent-light': '#8466F2',
+        'accent-light': '#9B85F7',
         'accent-deep': '#3A29A6',
       },
       fontFamily: {
@@ -27,7 +29,9 @@ export default {
       },
       animation: {
         'shimmer': 'shimmer 3s ease-in-out infinite',
-        'fadeInUp': 'fadeInUp 0.5s ease-out both',
+        'fadeInUp': 'fadeInUp 0.55s ease-out both',
+        'fadeInUpSlow': 'fadeInUp 0.7s ease-out both',
+        'fadeIn': 'fadeIn 0.4s ease-out both',
       },
       keyframes: {
         shimmer: {
@@ -35,8 +39,12 @@ export default {
           '100%': { transform: 'translateX(100%)' },
         },
         fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '0%': { opacity: '0', transform: 'translateY(14px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
       },
     },

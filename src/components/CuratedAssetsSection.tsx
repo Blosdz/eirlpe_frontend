@@ -25,11 +25,11 @@ export default function CuratedAssetsSection() {
     ];
 
     return (
-        <section className="py-20 sm:py-24 md:py-28 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-20 bg-primary/92 backdrop-blur-[2px] transition-colors duration-500">
+        <section id="dominios-destacados" className="curated-assets-section py-20 sm:py-24 md:py-28 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-20 bg-primary/92 dark:!bg-transparent backdrop-blur-[2px] transition-colors duration-500">
             <div className="mx-auto max-w-[1440px]">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-16 lg:mb-20">
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-charcoal">Dominios Destacados</h2>
-                    <a className="text-charcoal border-b border-charcoal font-bold text-sm sm:text-base tracking-widest uppercase pb-1 hover:opacity-80 transition-opacity shrink-0" href="#">
+                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-charcoal dark:!text-primary-bright">Dominios Destacados</h2>
+                    <a className="text-charcoal dark:!text-primary-bright border-b border-charcoal dark:!border-primary-bright font-bold text-sm sm:text-base tracking-widest uppercase pb-1 hover:opacity-80 transition-opacity shrink-0" href="/dominios">
                         Ver Más Dominios
                     </a>
                 </div>

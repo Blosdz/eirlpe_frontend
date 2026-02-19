@@ -1,17 +1,131 @@
+/* Tema morado PurpleColor - variables para que siempre se apliquen */
+:root {
+  --eirl-primary: #E8E3F9;
+  --eirl-primary-bright: #F2EFFC;
+  --eirl-bg-light: #F5F3FF;
+  --eirl-bg-dark: #252055;
+  --eirl-surface-dark: #2E2968;
+  --eirl-charcoal: #312773;
+  --eirl-muted: #7B6FA0;
+  --eirl-border: #D4CEF0;
+  --eirl-accent: #5B44F2;
+  --eirl-accent-light: #9B85F7;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Sin transición de color aquí: el cambio de tema es un crossfade uniforme desde ThemeContext */
   html {
     @apply antialiased;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--eirl-charcoal) transparent;
+  }
+  html.dark {
+    scrollbar-color: var(--eirl-primary) transparent;
   }
   body {
-    @apply bg-background-light;
+    background-color: var(--eirl-bg-light);
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  html.dark body {
+    background-color: #07051A;
   }
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Barra de desplazamiento suave y discreta (webkit: Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--eirl-charcoal);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--eirl-accent);
+    background-clip: padding-box;
+  }
+  html.dark *::-webkit-scrollbar-thumb {
+    background: var(--eirl-primary);
+    background-clip: padding-box;
+  }
+  html.dark *::-webkit-scrollbar-thumb:hover {
+    background: var(--eirl-accent-light);
+    background-clip: padding-box;
+  }
+
+  /* Respaldo modo oscuro por data-theme (por si dark: de Tailwind no aplica) */
+  html[data-theme="dark"] .services-section-box {
+    background-color: var(--eirl-surface-dark) !important;
+    border-color: rgba(232, 227, 249, 0.3) !important;
+  }
+  html[data-theme="dark"] .services-section-box h2,
+  html[data-theme="dark"] .services-section-box h3,
+  html[data-theme="dark"] .services-section-box p {
+    color: var(--eirl-primary-bright) !important;
+  }
+  html[data-theme="dark"] .service-card {
+    background-color: var(--eirl-surface-dark) !important;
+    border-color: rgba(232, 227, 249, 0.35) !important;
+  }
+  html[data-theme="dark"] .service-card span,
+  html[data-theme="dark"] .service-card h4,
+  html[data-theme="dark"] .service-card p {
+    color: var(--eirl-primary-bright) !important;
+  }
+
+  /* Respaldo modo oscuro: Dominios Destacados */
+  html[data-theme="dark"] .curated-assets-section {
+    background: transparent !important;
+  }
+  html[data-theme="dark"] .curated-assets-section h2,
+  html[data-theme="dark"] .curated-assets-section a {
+    color: var(--eirl-primary-bright) !important;
+    border-color: var(--eirl-primary-bright) !important;
+  }
+
+  /* Respaldo modo oscuro: AssetCard */
+  html[data-theme="dark"] .asset-card {
+    background-color: var(--eirl-surface-dark) !important;
+    border-color: rgba(232, 227, 249, 0.25) !important;
+  }
+  html[data-theme="dark"] .asset-card p,
+  html[data-theme="dark"] .asset-card h5 {
+    color: var(--eirl-primary-bright) !important;
+  }
+
+  /* Respaldo modo oscuro: FAQ Section */
+  html[data-theme="dark"] .faq-section {
+    background: transparent !important;
+  }
+  html[data-theme="dark"] .faq-section h2,
+  html[data-theme="dark"] .faq-section h3,
+  html[data-theme="dark"] .faq-section p,
+  html[data-theme="dark"] .faq-section span {
+    color: var(--eirl-primary-bright) !important;
+  }
+  html[data-theme="dark"] .faq-item {
+    border-color: rgba(232, 227, 249, 0.25) !important;
+  }
+  /* Respaldo modo oscuro: gradiente global de página */
+  html[data-theme="dark"] .page-dark-gradient {
+    display: block !important;
+  }
+  html[data-theme="dark"] .page-light-gradient {
+    display: none !important;
+  }
+  html[data-theme="dark"] body {
+    background-color: #07051A;
   }
 }
 
@@ -22,6 +136,34 @@
   .hero-bg-float {
     animation: hero-bg-float 25s ease-in-out infinite;
   }
+  /* Gradiente dramático de página completa – solo modo oscuro */
+  .page-dark-gradient {
+    background:
+      radial-gradient(ellipse 160% 55% at 50% -5%,
+        rgba(91, 68, 242, 0.42) 0%,
+        rgba(49, 39, 115, 0.32) 28%,
+        transparent 56%
+      ),
+      radial-gradient(ellipse 90% 45% at 50% 52%,
+        rgba(49, 39, 115, 0.12) 0%,
+        transparent 65%
+      ),
+      #07051A;
+  }
+  /* Gradiente dramático de página completa – solo modo claro */
+  .page-light-gradient {
+    background:
+      radial-gradient(ellipse 160% 55% at 50% -5%,
+        rgba(91, 68, 242, 0.13) 0%,
+        rgba(155, 133, 247, 0.07) 30%,
+        transparent 58%
+      ),
+      radial-gradient(ellipse 90% 40% at 50% 55%,
+        rgba(91, 68, 242, 0.05) 0%,
+        transparent 65%
+      ),
+      #F5F3FF;
+  }
 }
 
 @keyframes hero-bg-float {
@@ -29,4 +171,31 @@
   25% { transform: translate(2%, 1%); }
   50% { transform: translate(-1%, 2%); }
   75% { transform: translate(1%, -1%); }
+}
+
+/* Animaciones de entrada para hero (stagger via delay) - keyframes from Tailwind */
+.hero-entrance {
+  animation: hero-fade-in-up 0.55s ease-out both;
+}
+@keyframes hero-fade-in-up {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-entrance-1 { animation-delay: 0ms; }
+.hero-entrance-2 { animation-delay: 80ms; }
+.hero-entrance-3 { animation-delay: 160ms; }
+.hero-entrance-4 { animation-delay: 240ms; }
+.hero-entrance-5 { animation-delay: 340ms; }
+.hero-entrance-6 { animation-delay: 440ms; }
+.hero-entrance-7 { animation-delay: 560ms; }
+.hero-entrance-8 { animation-delay: 680ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entrance,
+  .hero-entrance-1, .hero-entrance-2, .hero-entrance-3,
+  .hero-entrance-4, .hero-entrance-5, .hero-entrance-6,
+  .hero-entrance-7, .hero-entrance-8 {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+  }
 }
