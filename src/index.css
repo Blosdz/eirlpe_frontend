@@ -64,46 +64,6 @@
     background-clip: padding-box;
   }
 
-  /* Respaldo modo oscuro por data-theme (por si dark: de Tailwind no aplica) */
-  html[data-theme="dark"] .services-section-box {
-    background-color: var(--eirl-surface-dark) !important;
-    border-color: rgba(232, 227, 249, 0.3) !important;
-  }
-  html[data-theme="dark"] .services-section-box h2,
-  html[data-theme="dark"] .services-section-box h3,
-  html[data-theme="dark"] .services-section-box p {
-    color: var(--eirl-primary-bright) !important;
-  }
-  html[data-theme="dark"] .service-card {
-    background-color: var(--eirl-surface-dark) !important;
-    border-color: rgba(232, 227, 249, 0.35) !important;
-  }
-  html[data-theme="dark"] .service-card span,
-  html[data-theme="dark"] .service-card h4,
-  html[data-theme="dark"] .service-card p {
-    color: var(--eirl-primary-bright) !important;
-  }
-
-  /* Respaldo modo oscuro: Dominios Destacados */
-  html[data-theme="dark"] .curated-assets-section {
-    background: transparent !important;
-  }
-  html[data-theme="dark"] .curated-assets-section h2,
-  html[data-theme="dark"] .curated-assets-section a {
-    color: var(--eirl-primary-bright) !important;
-    border-color: var(--eirl-primary-bright) !important;
-  }
-
-  /* Respaldo modo oscuro: AssetCard */
-  html[data-theme="dark"] .asset-card {
-    background-color: var(--eirl-surface-dark) !important;
-    border-color: rgba(232, 227, 249, 0.25) !important;
-  }
-  html[data-theme="dark"] .asset-card p,
-  html[data-theme="dark"] .asset-card h5 {
-    color: var(--eirl-primary-bright) !important;
-  }
-
   /* Respaldo modo oscuro: FAQ Section */
   html[data-theme="dark"] .faq-section {
     background: transparent !important;

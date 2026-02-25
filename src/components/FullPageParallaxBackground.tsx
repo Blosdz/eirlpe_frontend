@@ -1,113 +1,34 @@
 import { useParallax } from 'react-scroll-parallax';
 
-const DOT_SPACING = 40;
-const LINE_SPACING = 72;
+const GRID_SPACING = 64;
 
-/** Fondo parallax de página completa: puntos, líneas, círculos, triángulos. */
+/** Fondo parallax minimalista: solo una cuadrícula sutil con parallax. */
 export default function FullPageParallaxBackground() {
-    const dotsFast = useParallax<HTMLDivElement>({ speed: -38 });
-    const dotsSlow = useParallax<HTMLDivElement>({ speed: 20 });
-    const linesLayer = useParallax<HTMLDivElement>({ speed: 28 });
-    const circlesBack = useParallax<HTMLDivElement>({ speed: -22 });
-    const circlesFront = useParallax<HTMLDivElement>({ speed: 18 });
-    const trianglesLayer = useParallax<HTMLDivElement>({ speed: -15 });
-    const trianglesLayer2 = useParallax<HTMLDivElement>({ speed: 25 });
+    const gridLayer = useParallax<HTMLDivElement>({ speed: -8 });
+
     return (
         <div
-            className="fixed inset-0 z-0 overflow-hidden pointer-events-none text-charcoal/90 dark:text-primary/40 transition-colors duration-500"
+            className="fixed inset-0 z-0 overflow-hidden pointer-events-none transition-colors duration-500"
             aria-hidden
         >
-            {/* Patrón de puntos (rápido) - suave */}
             <div
-                ref={dotsFast.ref}
-                className="absolute -top-[30%] -left-[30%] w-[160%] h-[160%] opacity-[0.06] dark:opacity-[0.08]"
+                ref={gridLayer.ref}
+                className="absolute -top-[15%] -left-[15%] w-[130%] h-[130%] opacity-[0.07] dark:opacity-[0.06] text-charcoal dark:text-primary/40"
                 style={{ willChange: 'transform' }}
             >
                 <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <pattern id="fp-dots-fast" width={DOT_SPACING} height={DOT_SPACING} patternUnits="userSpaceOnUse">
-                            <circle cx={DOT_SPACING / 2} cy={DOT_SPACING / 2} r="2" fill="currentColor" />
+                        <pattern id="fp-grid" width={GRID_SPACING} height={GRID_SPACING} patternUnits="userSpaceOnUse">
+                            <line x1={0} y1={0} x2={0} y2={GRID_SPACING} stroke="currentColor" strokeWidth="0.5" />
+                            <line x1={0} y1={0} x2={GRID_SPACING} y2={0} stroke="currentColor" strokeWidth="0.5" />
                         </pattern>
                     </defs>
-                    <rect width="100%" height="100%" fill="url(#fp-dots-fast)" />
+                    <rect width="100%" height="100%" fill="url(#fp-grid)" />
                 </svg>
             </div>
 
-            {/* Patrón de puntos (lento) - profundidad */}
-            <div
-                ref={dotsSlow.ref}
-                className="absolute -top-[25%] -left-[25%] w-[150%] h-[150%] opacity-[0.04] dark:opacity-[0.06]"
-                style={{ willChange: 'transform' }}
-            >
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="fp-dots-slow" width={DOT_SPACING * 1.4} height={DOT_SPACING * 1.4} patternUnits="userSpaceOnUse">
-                            <circle cx={DOT_SPACING * 0.7} cy={DOT_SPACING * 0.7} r="1.2" fill="currentColor" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#fp-dots-slow)" />
-                </svg>
-            </div>
-
-            {/* Líneas (cuadrícula) */}
-            <div
-                ref={linesLayer.ref}
-                className="absolute -top-[30%] -left-[30%] w-[160%] h-[160%] opacity-[0.04] dark:opacity-[0.06]"
-                style={{ willChange: 'transform' }}
-            >
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <pattern id="fp-lines-v" width={LINE_SPACING} height={LINE_SPACING} patternUnits="userSpaceOnUse">
-                            <line x1={0} y1={0} x2={0} y2={LINE_SPACING} stroke="currentColor" strokeWidth="0.6" />
-                        </pattern>
-                        <pattern id="fp-lines-h" width={LINE_SPACING} height={LINE_SPACING} patternUnits="userSpaceOnUse">
-                            <line x1={0} y1={0} x2={LINE_SPACING} y2={0} stroke="currentColor" strokeWidth="0.6" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#fp-lines-v)" />
-                    <rect width="100%" height="100%" fill="url(#fp-lines-h)" />
-                </svg>
-            </div>
-
-            {/* Círculos (capa atrás) */}
-            <div ref={circlesBack.ref} className="absolute inset-0 flex items-center justify-center overflow-visible" style={{ willChange: 'transform' }}>
-                <div className="absolute top-[15%] left-[10%] w-32 h-32 rounded-full border border-charcoal/15" />
-                <div className="absolute top-[40%] right-[8%] w-24 h-24 rounded-full border border-charcoal/12" />
-                <div className="absolute bottom-[25%] left-[20%] w-40 h-40 rounded-full border border-muted-beige/25" />
-                <div className="absolute top-[60%] right-[25%] w-16 h-16 rounded-full bg-accent/[0.08]" />
-                <div className="absolute bottom-[40%] right-[12%] w-20 h-20 rounded-full border border-charcoal/10" />
-            </div>
-
-            {/* Círculos (capa al frente) */}
-            <div ref={circlesFront.ref} className="absolute inset-0 overflow-visible" style={{ willChange: 'transform' }}>
-                <div className="absolute top-[25%] right-[15%] w-20 h-20 rounded-full border-2 border-charcoal/20" />
-                <div className="absolute top-[70%] left-[12%] w-28 h-28 rounded-full border border-muted-beige/30" />
-                <div className="absolute bottom-[30%] left-[35%] w-14 h-14 rounded-full bg-accent/20" />
-                <div className="absolute top-[35%] left-[8%] w-10 h-10 rounded-full bg-accent/10" />
-                <div className="absolute bottom-[15%] right-[30%] w-24 h-24 rounded-full border-2 border-charcoal/15" />
-                <div className="absolute top-[80%] right-[10%] w-12 h-12 rounded-full bg-accent/15" />
-            </div>
-
-            {/* Triángulos (capa 1) */}
-            <div ref={trianglesLayer.ref} className="absolute inset-0 overflow-visible" style={{ willChange: 'transform' }}>
-                <div className="absolute top-[8%] left-[6%] w-24 h-20 border border-charcoal/20 bg-transparent" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
-                <div className="absolute top-[42%] right-[12%] w-20 h-16 bg-accent/[0.08]" style={{ clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)' }} />
-                <div className="absolute bottom-[22%] right-[18%] w-28 h-24 border border-muted-beige/30 bg-transparent" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
-                <div className="absolute bottom-[38%] left-[18%] w-16 h-14 bg-accent/[0.08]" style={{ clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)' }} />
-                <div className="absolute top-[18%] right-[8%] w-14 h-12 border border-charcoal/15 bg-transparent" style={{ clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)' }} />
-            </div>
-
-            {/* Triángulos (capa 2) */}
-            <div ref={trianglesLayer2.ref} className="absolute inset-0 overflow-visible" style={{ willChange: 'transform' }}>
-                <div className="absolute top-[28%] left-[12%] w-20 h-16 border border-charcoal/18 bg-transparent" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
-                <div className="absolute top-[52%] left-[4%] w-16 h-14 bg-accent/15" style={{ clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)' }} />
-                <div className="absolute bottom-[28%] right-[8%] w-22 h-18 border border-muted-beige/25 bg-transparent" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }} />
-                <div className="absolute bottom-[12%] left-[28%] w-12 h-10 bg-accent/[0.06]" style={{ clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)' }} />
-                <div className="absolute top-[12%] right-[28%] w-18 h-15 border border-charcoal/12 bg-transparent" style={{ clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)' }} />
-            </div>
-
-            {/* Velado suave para que el texto siga legible */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background-light/40 via-background-light/5 to-background-light/40 dark:from-background-dark/40 dark:via-background-dark/5 dark:to-background-dark/40 transition-colors duration-500" />
+            {/* Degradado que suaviza los bordes del grid */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background-light/60 via-transparent to-background-light/60 dark:from-background-dark/70 dark:via-transparent dark:to-background-dark/70 transition-colors duration-500" />
         </div>
     );
 }

@@ -1,41 +1,68 @@
-import AssetCard from './AssetCard';
+const GRADIENTS = [
+    'from-accent/20 via-accent/5 to-transparent',
+    'from-purple-500/20 via-purple-400/5 to-transparent',
+    'from-indigo-500/20 via-indigo-400/5 to-transparent',
+    'from-violet-500/20 via-violet-400/5 to-transparent',
+];
+
+const assets = [
+    { domain: 'consultoria.eirl.pe', category: 'Disponible', icon: 'business_center', gradient: GRADIENTS[0] },
+    { domain: 'abogados.eirl.pe', category: 'Premium', icon: 'gavel', gradient: GRADIENTS[1] },
+    { domain: 'arquitectura.eirl.pe', category: 'Destacado', icon: 'architecture', gradient: GRADIENTS[2] },
+    { domain: 'contadores.eirl.pe', category: 'Disponible', icon: 'calculate', gradient: GRADIENTS[3] },
+];
 
 export default function CuratedAssetsSection() {
-    const assets = [
-        {
-            imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBiYakFhG7bvSPH4HuAqiplXAaLiPf3EktIMzEkrxK7wq5jB7Q3oUe51LQyHpSuhNQn77hRI7LR-hA0ekNSc6vd6LemkLqjn7-u2yJc2Hm18yA16n6RSDl-5wM2iUuwbA2IOSSOQmqGsCrr74uk41W4wTJ4lzs4efCyAHYTS_QGsYUwmD5RpTw6P-rU6RElp5MDsIjhce0DfiHRDXdafsw-18VBIsc8qFTubS7gGfJ_TyzofY7xAqBBQ14G3UPyV6dbgtw3s5l2cSo',
-            category: 'Disponible',
-            domain: 'consultoria.eirl.pe'
-        },
-        {
-            imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDbIf5O7_d47v0YkykE5n41weihXPbL-wdLAIpyCT4Keaf0NwFalw4_7Ie7IyiZ3kO2N4r2Cto7h_WuG6J3XAoOfzeoL_Wm6M3FhCtet9M4ni7uzxE7uEHf2bOc8QsgQLKLImu1fON-pl_KJZFqyDca4x06apStPfPxOt0OU_2K7XXSsBOVXjVc0nXYFDWhqBRiOITvK382OHq3GEGehw-CvlfykIkY0pCCC3Nqe8gC0bb8E3KrHcHbJTE-u2v1qYz28UzW5NHLGQ',
-            category: 'Premium',
-            domain: 'abogados.eirl.pe'
-        },
-        {
-            imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBz8M5xXn82i50ChE3dctr5tn_0e7-iwkVX_RZqrTVFpHhwJz4iuWj1hzPtXKxqSFowEmiCWSWE_w1mF2Yst_NYvuxElzbcg8kyYG4jb9wqWzeU5FYsjZZu2s3IlmlQeDfXVgexWSdqsHMzP4-Shg9mp5uBI_LM7VrKkkJaDUr8c3OdoTFdBcL-GjCR41MiceHfcNodtGo6A4vITu3NosA6MkgYu0Ha1ww2H5yLyhXxoWJ11iqypmwktw9AwrwIUElNBI51jSmmeY',
-            category: 'Destacado',
-            domain: 'arquitectura.eirl.pe'
-        },
-        {
-            imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCA3GoJ9ZnLkkBXGRSgY9G2YSG67dHkgT8e-Ky2JNSYRa9bdpRJTfSLruCW_6BphgVmSac23tDwiFdeEGGdsvJs5DwOd2GAW0lMm9W8cwveW8b5m1N95O_kDzTVLmQXhvqqwQ1_v833Pp9mOlqtQQXZJqKPrDL2CQrG0ILPMsBD26daD3YNwavT4SuJ7c-PaLmjmZplr7jGGjXJtqPaJwWtT614F7ztKe6E-BjtKnHNSPYMN5idAi17rZPPLqEbJ5m9k4_im8v0QW0',
-            category: 'Disponible',
-            domain: 'contadores.eirl.pe'
-        }
-    ];
-
     return (
-        <section id="dominios-destacados" className="curated-assets-section py-20 sm:py-24 md:py-28 lg:py-32 px-6 sm:px-8 md:px-12 lg:px-20 bg-primary/92 dark:!bg-transparent backdrop-blur-[2px] transition-colors duration-500">
-            <div className="mx-auto max-w-[1440px]">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6 mb-12 sm:mb-16 lg:mb-20">
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-charcoal dark:!text-primary-bright">Dominios Destacados</h2>
-                    <a className="text-charcoal dark:!text-primary-bright border-b border-charcoal dark:!border-primary-bright font-bold text-sm sm:text-base tracking-widest uppercase pb-1 hover:opacity-80 transition-opacity shrink-0" href="/dominios">
-                        Ver Más Dominios
+        <section id="dominios-destacados" className="py-24 sm:py-28 md:py-36 px-6 sm:px-8 md:px-12 lg:px-20">
+            <div className="mx-auto max-w-6xl">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12 sm:mb-16">
+                    <div className="space-y-3">
+                        <p className="text-accent dark:text-accent-light uppercase tracking-[0.2em] text-sm font-bold">
+                            Dominios populares
+                        </p>
+                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal dark:text-primary">
+                            Dominios Destacados
+                        </h2>
+                    </div>
+                    <a
+                        className="text-accent dark:text-accent-light font-semibold text-sm tracking-wide hover:underline underline-offset-4 shrink-0"
+                        href="/dominios"
+                    >
+                        Ver todos los dominios &rarr;
                     </a>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
-                    {assets.map((asset, index) => (
-                        <AssetCard key={index} {...asset} />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+                    {assets.map((a) => (
+                        <a
+                            key={a.domain}
+                            href={`/templates/${a.domain.split('.')[0]}`}
+                            className="group relative flex flex-col justify-between rounded-2xl border border-charcoal/8 dark:border-primary/20 bg-white/60 dark:bg-surface-dark/60 backdrop-blur-sm overflow-hidden p-6 sm:p-8 min-h-[200px] hover:border-accent/30 dark:hover:border-accent-light/40 hover:shadow-xl hover:shadow-accent/5 dark:hover:shadow-accent/10 transition-all duration-300"
+                        >
+                            <div className={`absolute inset-0 bg-gradient-to-br ${a.gradient} dark:opacity-60 opacity-40 group-hover:opacity-70 transition-opacity duration-300`} />
+
+                            <div className="relative z-10">
+                                <span className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider ${
+                                    a.category === 'Premium'
+                                        ? 'bg-amber-500/15 text-amber-700 dark:bg-amber-400/20 dark:text-amber-300'
+                                        : a.category === 'Destacado'
+                                        ? 'bg-accent/15 text-accent dark:bg-accent/25 dark:text-accent-light'
+                                        : 'bg-emerald-500/15 text-emerald-700 dark:bg-emerald-400/20 dark:text-emerald-300'
+                                }`}>
+                                    {a.category}
+                                </span>
+                            </div>
+
+                            <div className="relative z-10 mt-8">
+                                <div className="mb-3 inline-flex items-center justify-center size-10 rounded-lg bg-charcoal/5 dark:bg-primary/10 text-charcoal/50 dark:text-primary/60">
+                                    <span className="material-symbols-outlined text-xl">{a.icon}</span>
+                                </div>
+                                <p className="text-lg sm:text-xl font-bold text-charcoal dark:text-primary tracking-tight group-hover:text-accent dark:group-hover:text-accent-light transition-colors duration-200">
+                                    {a.domain}
+                                </p>
+                            </div>
+                        </a>
                     ))}
                 </div>
             </div>

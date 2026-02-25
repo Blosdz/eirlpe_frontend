@@ -48,7 +48,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className="mt-20 sm:mt-24 md:mt-32 pt-8 sm:pt-10 md:pt-12 border-t border-primary/10 dark:border-primary-bright/20 mx-auto max-w-[1440px] flex flex-col md:flex-row justify-between items-center gap-4 px-6 sm:px-8 md:px-12 lg:px-20 text-xs sm:text-sm uppercase tracking-[0.3em] font-bold text-primary/30 dark:text-primary-bright/70">
-                <p>© 2024 eirl.pe. Todos los derechos reservados.</p>
+                <p>© 2026 eirl.pe. Todos los derechos reservados.</p>
                 <p>Empoderando negocios digitales.</p>
             </div>
         </footer>
