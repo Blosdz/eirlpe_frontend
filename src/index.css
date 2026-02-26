@@ -23,6 +23,7 @@
     scrollbar-width: thin;
     scrollbar-color: var(--eirl-charcoal) transparent;
     overflow-x: hidden;
+
   }
   html.dark {
     scrollbar-color: var(--eirl-primary) transparent;

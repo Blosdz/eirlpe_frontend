@@ -192,6 +192,7 @@ export default function Header() {
                 }`}
             >
                 <div className="flex flex-col h-full pt-[max(6rem,calc(5rem+env(safe-area-inset-top)))] pb-safe px-4 sm:px-6">
+
                     <nav className="flex flex-col gap-2">
                         {navLinks.map((link) => {
                             const navItemClass = "flex items-center gap-4 px-4 py-4 rounded-xl text-charcoal dark:text-primary font-semibold text-lg tracking-wide uppercase hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors duration-200";
