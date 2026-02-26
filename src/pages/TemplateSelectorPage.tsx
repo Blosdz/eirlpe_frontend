@@ -92,7 +92,7 @@ function TemplateCard({ template, selected, onSelect }: { template: Template; se
                 )}
             </div>
             {/* Info - modo oscuro: fondo y texto claros */}
-            <div className="p-5 sm:p-6 bg-white dark:bg-surface-dark dark:border-t dark:border-primary/25 space-y-2 sm:space-y-3 transition-colors duration-500">
+            <div className="p-5 sm:p-6 bg-white dark:bg-surface-dark dark:border-t dark:border-primary/20 space-y-2 sm:space-y-3 transition-colors duration-500">
                 <div className="flex items-center justify-between">
                     <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-charcoal dark:text-primary-bright tracking-tight">{template.name}</h3>
                     <span className="text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-muted-beige dark:text-primary/85 border border-charcoal/10 dark:border-primary/35 px-2.5 py-1 rounded-full">
@@ -113,10 +113,10 @@ export default function TemplateSelectorPage() {
     const domainDisplay = domain ? `${domain}.eirl.pe` : '';
 
     return (
-        <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-charcoal dark:text-primary-bright transition-colors duration-500">
+        <div className="min-h-screen min-h-[100dvh] bg-background-light dark:bg-transparent font-display text-charcoal dark:text-primary-bright transition-colors duration-500 overflow-x-hidden">
             <Header />
-            <main className="pt-28 sm:pt-32 md:pt-36 pb-20 sm:pb-24 px-6 sm:px-8 md:px-12 lg:px-20">
-                <div className="mx-auto max-w-7xl">
+            <main className="pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-24 sm:pb-28 md:pb-32 lg:pb-36 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 min-w-0">
+                <div className="mx-auto max-w-7xl min-w-0">
                     {/* Stepper */}
                     <div className="mb-10 sm:mb-12 md:mb-14">
                         <Stepper currentStep={1} />
@@ -152,12 +152,12 @@ export default function TemplateSelectorPage() {
                     </div>
 
                     {/* Barra inferior fija con CTA */}
-                    <div className={`fixed bottom-0 left-0 right-0 z-40 transition-all duration-500 ease-out ${
+                    <div className={`fixed bottom-0 left-0 right-0 z-40 transition-all duration-500 ease-out pb-safe ${
                         selectedTemplate ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
                     }`}>
-                        <div className="bg-charcoal dark:bg-background-dark border-t border-charcoal/20 dark:border-primary/30 px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 transition-colors duration-500">
-                            <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
-                                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div className="bg-charcoal dark:bg-background-dark border-t border-charcoal/20 dark:border-primary/30 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 py-4 sm:py-5 transition-colors duration-500">
+                            <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 min-w-0">
+                                <div className="flex items-center gap-2 sm:gap-3 md:gap-4 min-w-0 truncate">
                                     <span className="text-primary/70 text-sm sm:text-base font-light truncate">
                                         {domainDisplay}
                                     </span>
@@ -168,7 +168,7 @@ export default function TemplateSelectorPage() {
                                 </div>
                                 <button
                                     onClick={() => navigate(`/registro/${encodeURIComponent(domain || '')}/${encodeURIComponent(selectedTemplate || '')}`)}
-                                    className="shrink-0 px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 bg-accent text-white rounded-full font-bold text-sm sm:text-base tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-95 shadow-lg shadow-accent/25"
+                                    className="shrink-0 w-full sm:w-auto min-h-[44px] px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 bg-accent text-white rounded-full font-bold text-sm sm:text-base tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-95 shadow-lg shadow-accent/25"
                                 >
                                     Continuar
                                 </button>

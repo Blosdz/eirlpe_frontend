@@ -46,26 +46,26 @@ export default function DomainSearchTransition({ domain, onComplete }: Props) {
 
     return (
         <div
-            className={`fixed inset-0 z-[9998] flex flex-col items-center justify-center bg-background-light dark:bg-background-dark transition-opacity duration-500 ${
+            className={`fixed inset-0 z-[9998] flex flex-col items-center justify-center bg-background-light dark:bg-background-dark transition-opacity duration-500 px-4 sm:px-6 min-w-0 ${
                 visible ? 'opacity-100' : 'opacity-0'
             }`}
         >
             {/* Contenido central */}
-            <div className={`flex flex-col items-center space-y-10 sm:space-y-12 transition-all duration-700 ${
+            <div className={`flex flex-col items-center space-y-8 sm:space-y-10 md:space-y-12 transition-all duration-700 w-full max-w-lg min-w-0 ${
                 visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}>
                 {/* Dominio */}
-                <div className="text-center space-y-3">
-                    <p className="text-sm sm:text-base font-bold tracking-[0.2em] uppercase text-muted-beige dark:text-primary/80">
+                <div className="text-center space-y-2 sm:space-y-3 min-w-0 w-full">
+                    <p className="text-xs sm:text-sm md:text-base font-bold tracking-[0.2em] uppercase text-muted-beige dark:text-primary/80">
                         Dominio
                     </p>
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-charcoal dark:text-primary">
+                    <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-charcoal dark:text-primary break-all">
                         {domain}<span className="text-muted-beige dark:text-primary/80">.eirl.pe</span>
                     </h2>
                 </div>
 
                 {/* Barra de progreso */}
-                <div className="w-48 sm:w-64 md:w-80 h-0.5 bg-charcoal/10 dark:bg-primary/15 rounded-full overflow-hidden">
+                <div className="w-full max-w-[12rem] sm:max-w-[16rem] md:max-w-[20rem] h-0.5 bg-charcoal/10 dark:bg-primary/15 rounded-full overflow-hidden">
                     <div
                         className="h-full bg-accent dark:bg-accent-light rounded-full transition-all duration-700 ease-out"
                         style={{ width: `${progress}%` }}

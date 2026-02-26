@@ -1,8 +1,8 @@
 export default function Footer() {
     return (
-        <footer className="bg-charcoal dark:!bg-[rgba(7,5,26,0.97)] text-primary dark:text-primary-bright pt-24 sm:pt-28 md:pt-32 lg:pt-40 pb-12 sm:pb-16 px-6 sm:px-8 md:px-12 lg:px-20 transition-colors duration-500">
-            <div className="mx-auto max-w-[1440px] grid grid-cols-1 md:grid-cols-4 gap-12 sm:gap-16 md:gap-10 lg:gap-12">
-                <div className="md:col-span-2 space-y-6 sm:space-y-8 lg:space-y-10">
+        <footer className="bg-charcoal dark:!bg-[rgba(7,5,26,0.97)] text-primary dark:text-primary-bright pt-16 sm:pt-20 md:pt-24 lg:pt-32 xl:pt-40 pb-10 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 transition-colors duration-500 overflow-hidden">
+            <div className="mx-auto max-w-[1440px] grid grid-cols-1 md:grid-cols-4 gap-10 sm:gap-12 md:gap-8 lg:gap-10 xl:gap-12 min-w-0">
+                <div className="md:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8 min-w-0">
                     <div className="flex items-center gap-4 sm:gap-5">
                         <div className="size-9 sm:size-10 md:size-12 shrink-0">
                             <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +47,7 @@ export default function Footer() {
                     </nav>
                 </div>
             </div>
-            <div className="mt-20 sm:mt-24 md:mt-32 pt-8 sm:pt-10 md:pt-12 border-t border-primary/10 dark:border-primary-bright/20 mx-auto max-w-[1440px] flex flex-col md:flex-row justify-between items-center gap-4 px-6 sm:px-8 md:px-12 lg:px-20 text-xs sm:text-sm uppercase tracking-[0.3em] font-bold text-primary/30 dark:text-primary-bright/70">
+            <div className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 pt-6 sm:pt-8 md:pt-10 border-t border-primary/10 dark:border-primary-bright/20 mx-auto max-w-[1440px] flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold text-primary/30 dark:text-primary-bright/70 text-center md:text-left">
                 <p>© 2026 eirl.pe. Todos los derechos reservados.</p>
                 <p>Empoderando negocios digitales.</p>
             </div>

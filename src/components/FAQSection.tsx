@@ -12,9 +12,9 @@ function FAQItem({ question, answer }: FAQItemProps) {
         <div className="faq-item border-b border-border-beige dark:!border-primary/25 transition-colors duration-500">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full py-5 sm:py-6 md:py-8 flex justify-between items-center text-left group hover:bg-accent/5 dark:hover:bg-primary/10 px-4 sm:px-6 rounded-lg transition-colors duration-300"
+                className="w-full py-4 sm:py-5 md:py-6 lg:py-8 flex justify-between items-start sm:items-center gap-3 text-left group hover:bg-accent/5 dark:hover:bg-primary/10 px-4 sm:px-6 rounded-lg transition-colors duration-300"
             >
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-charcoal dark:!text-primary-bright pr-8">{question}</h3>
+                <h3 className="min-w-0 flex-1 text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-charcoal dark:!text-primary-bright pr-2 sm:pr-8">{question}</h3>
                 <span className={`material-symbols-outlined text-2xl sm:text-3xl text-charcoal dark:!text-primary-bright transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
                     expand_more
                 </span>
@@ -57,14 +57,14 @@ export default function FAQSection() {
     ];
 
     return (
-        <section id="preguntas-frecuentes" className="faq-section py-20 sm:py-24 md:py-32 lg:py-40 px-6 sm:px-8 md:px-12 lg:px-20 bg-background-light/90 dark:!bg-transparent backdrop-blur-[2px] transition-colors duration-500">
-            <div className="mx-auto max-w-4xl lg:max-w-5xl">
-                <div className="text-center mb-12 sm:mb-16 lg:mb-20 space-y-4 sm:space-y-6">
-                    <h3 className="text-charcoal dark:!text-primary-bright uppercase tracking-[0.2em] text-sm sm:text-base font-bold">Preguntas Frecuentes</h3>
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-charcoal dark:!text-primary-bright">
+        <section id="preguntas-frecuentes" className="faq-section py-14 sm:py-20 md:py-24 lg:py-32 xl:py-40 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 bg-background-light/90 dark:!bg-transparent backdrop-blur-[2px] transition-colors duration-500">
+            <div className="mx-auto max-w-4xl lg:max-w-5xl min-w-0">
+                <div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20 space-y-3 sm:space-y-4 md:space-y-6">
+                    <h3 className="text-charcoal dark:!text-primary-bright uppercase tracking-[0.2em] text-xs sm:text-sm md:text-base font-bold">Preguntas Frecuentes</h3>
+                    <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-charcoal dark:!text-primary-bright">
                         ¿Tienes dudas?
                     </h2>
-                    <p className="text-muted-beige dark:!text-primary-bright/95 text-lg sm:text-xl md:text-2xl font-light max-w-2xl mx-auto">
+                    <p className="text-muted-beige dark:!text-primary-bright/95 text-base sm:text-lg md:text-xl lg:text-2xl font-light max-w-2xl mx-auto px-1">
                         Aquí respondemos las preguntas más comunes sobre nuestro servicio.
                     </p>
                 </div>

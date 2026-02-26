@@ -31,14 +31,14 @@ export default function Header() {
     }, [mobileOpen]);
 
     const navLinks = [
-        { to: '/dominios', hash: 'dominios-destacados', label: 'Dominios' },
+        { to: '/dominios', hash: undefined, label: 'Dominios' },
         { to: '/precios', hash: undefined, label: 'Precios' },
         { to: '/faq', hash: 'preguntas-frecuentes', label: 'FAQ' },
     ];
 
     return (
         <>
-            <header className="fixed top-0 z-50 w-full border-b border-solid border-border-beige/50 dark:border-primary/15 bg-background-light/80 dark:bg-[rgba(7,5,26,0.82)] backdrop-blur-md px-6 sm:px-8 md:px-12 lg:px-20 py-4 sm:py-5 md:py-6 transition-colors duration-500 ease-in-out">
+            <header className="fixed top-0 left-0 right-0 z-50 w-full max-w-[100vw] border-b border-solid border-border-beige/50 dark:border-primary/15 bg-background-light/80 dark:bg-[rgba(7,5,26,0.82)] backdrop-blur-md px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 pb-3 sm:pb-4 md:pb-5 lg:pb-6 pt-[max(0.75rem,calc(0.75rem+env(safe-area-inset-top)))] transition-colors duration-500 ease-in-out">
                 <div className="mx-auto flex max-w-[1440px] items-center justify-between">
                     <Link to="/" className="flex items-center gap-3 sm:gap-4">
                         <div className="size-7 sm:size-8 md:size-10 text-charcoal dark:text-primary transition-colors duration-500 shrink-0">
@@ -187,11 +187,11 @@ export default function Header() {
 
             {/* Mobile menu panel */}
             <div
-                className={`fixed top-0 right-0 z-40 h-full w-[min(80vw,320px)] bg-background-light dark:bg-background-dark border-l border-border-beige/50 dark:border-primary/25 shadow-2xl md:hidden transition-transform duration-300 ease-out ${
+                className={`fixed top-0 right-0 z-40 h-full w-[min(88vw,340px)] max-w-full bg-background-light dark:bg-background-dark border-l border-border-beige/50 dark:border-primary/25 shadow-2xl md:hidden transition-transform duration-300 ease-out ${
                     mobileOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}
             >
-                <div className="flex flex-col h-full pt-24 pb-8 px-6">
+                <div className="flex flex-col h-full pt-[max(6rem,calc(5rem+env(safe-area-inset-top)))] pb-safe px-4 sm:px-6">
                     <nav className="flex flex-col gap-2">
                         {navLinks.map((link) => {
                             const navItemClass = "flex items-center gap-4 px-4 py-4 rounded-xl text-charcoal dark:text-primary font-semibold text-lg tracking-wide uppercase hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors duration-200";

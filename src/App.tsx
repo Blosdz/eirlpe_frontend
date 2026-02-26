@@ -24,7 +24,7 @@ function App() {
     <ReactLenis root options={lenisOptions}>
       <ParallaxProvider>
         <Router>
-          <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden font-display text-charcoal antialiased transition-colors duration-500 ease-in-out">
+          <div className="relative flex min-h-screen min-h-[100dvh] w-full max-w-[100vw] flex-col overflow-x-hidden font-display text-charcoal antialiased transition-colors duration-500 ease-in-out">
             {/* Gradiente dramático – solo modo oscuro, fijo para toda la página */}
             <div className="page-dark-gradient fixed inset-0 z-0 hidden dark:block pointer-events-none" aria-hidden />
             {/* Gradiente dramático – solo modo claro, fijo para toda la página */}

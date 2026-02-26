@@ -22,6 +22,7 @@
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--eirl-charcoal) transparent;
+    overflow-x: hidden;
   }
   html.dark {
     scrollbar-color: var(--eirl-primary) transparent;
@@ -29,6 +30,12 @@
   body {
     background-color: var(--eirl-bg-light);
     transition: background-color 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+    min-width: 0;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
   }
   html.dark body {
     background-color: #07051A;
@@ -87,9 +94,72 @@
   html[data-theme="dark"] body {
     background-color: #07051A;
   }
+
+  /* Modo oscuro: sección "Lo que ofrecemos" y cards – tono intermedio, texto claro */
+  html.dark .services-section-box,
+  html[data-theme="dark"] .services-section-box {
+    background-color: #1a1835 !important;
+    border-color: rgba(232, 227, 249, 0.2) !important;
+  }
+  html.dark .services-section-box h2,
+  html.dark .services-section-box h3,
+  html.dark .services-section-box p,
+  html[data-theme="dark"] .services-section-box h2,
+  html[data-theme="dark"] .services-section-box h3,
+  html[data-theme="dark"] .services-section-box p {
+    color: #F2EFFC !important;
+  }
+  html.dark .service-card,
+  html[data-theme="dark"] .service-card {
+    background-color: #1a1835 !important;
+    border-color: rgba(232, 227, 249, 0.2) !important;
+  }
+  html.dark .service-card span,
+  html.dark .service-card h4,
+  html.dark .service-card p,
+  html[data-theme="dark"] .service-card span,
+  html[data-theme="dark"] .service-card h4,
+  html[data-theme="dark"] .service-card p {
+    color: #F2EFFC !important;
+  }
+  /* Línea vertical: en dark debe "encenderse" al hacer hover en la tarjeta */
+  html.dark .service-card:hover .service-card-line,
+  html[data-theme="dark"] .service-card:hover .service-card-line {
+    background-color: var(--eirl-accent-light) !important;
+    box-shadow: 0 0 10px rgba(155, 133, 247, 0.35);
+  }
+
+  /* Modo oscuro: pantallas de login, registro, signup, dominios, precios, FAQ, templates */
+  html.dark main,
+  html[data-theme="dark"] main {
+    color: var(--eirl-primary-bright);
+  }
+  html.dark main a,
+  html[data-theme="dark"] main a {
+    color: var(--eirl-primary-bright);
+  }
+  html.dark main input,
+  html[data-theme="dark"] main input {
+    color: var(--eirl-primary-bright);
+  }
+  html.dark main input::placeholder,
+  html[data-theme="dark"] main input::placeholder {
+    color: rgba(242, 239, 252, 0.6);
+  }
+  html.dark main label,
+  html[data-theme="dark"] main label {
+    color: var(--eirl-primary-bright);
+  }
 }
 
 @layer utilities {
+  /* Áreas seguras para dispositivos con notch/home indicator */
+  .pb-safe {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  .pt-safe {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
   .hero-gradient {
     background: linear-gradient(180deg, rgba(232, 227, 249, 0) 0%, rgba(232, 227, 249, 1) 100%);
   }

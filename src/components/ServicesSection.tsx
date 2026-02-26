@@ -20,20 +20,20 @@ export default function ServicesSection() {
     ];
 
     return (
-        <section className="py-20 sm:py-24 md:py-32 lg:py-40 px-6 sm:px-8 md:px-12 lg:px-20 transition-colors duration-500">
-            <div className="services-section-box mx-auto max-w-5xl lg:max-w-6xl rounded-3xl bg-background-light/90 dark:!bg-surface-dark backdrop-blur-[2px] shadow-xl shadow-charcoal/5 dark:shadow-black/30 border border-charcoal/5 dark:!border-primary/30 px-8 sm:px-10 md:px-16 lg:px-20 py-14 sm:py-16 md:py-20 lg:py-24 transition-colors duration-500">
-                <div className="flex flex-col md:flex-row justify-between items-end gap-8 sm:gap-10 lg:gap-12 mb-16 sm:mb-20 lg:mb-24">
-                    <div className="max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6">
-                        <h3 className="text-charcoal dark:!text-primary-bright uppercase tracking-[0.2em] text-sm sm:text-base font-bold">Lo que ofrecemos</h3>
-                        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-charcoal dark:!text-primary-bright dark:font-medium leading-tight">
+        <section className="py-14 sm:py-20 md:py-24 lg:py-32 xl:py-40 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 transition-colors duration-500">
+            <div className="services-section-box mx-auto max-w-5xl lg:max-w-6xl rounded-2xl sm:rounded-3xl bg-background-light/90 dark:!bg-surface-dark-elevated backdrop-blur-[2px] shadow-xl shadow-charcoal/5 dark:shadow-black/20 dark:ring-1 dark:ring-primary/20 border border-charcoal/5 dark:!border-primary/20 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 transition-colors duration-500 min-w-0">
+                <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
+                    <div className="min-w-0 max-w-2xl lg:max-w-3xl space-y-3 sm:space-y-4 md:space-y-6">
+                        <h3 className="text-charcoal dark:!text-primary-bright uppercase tracking-[0.2em] text-xs sm:text-sm md:text-base font-bold">Lo que ofrecemos</h3>
+                        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-charcoal dark:!text-primary-bright dark:font-medium leading-tight">
                             Todo lo que necesitas para tu presencia digital.
                         </h2>
                     </div>
-                    <p className="max-w-sm md:max-w-md text-muted-beige dark:!text-primary-bright text-lg sm:text-xl md:text-2xl font-light leading-relaxed">
+                    <p className="min-w-0 max-w-sm md:max-w-md text-muted-beige dark:!text-primary-bright text-base sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed">
                         Desde el registro hasta el soporte técnico, tenemos todo cubierto para que te enfoques en tu negocio.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
                     {services.map((service, index) => (
                         <ServiceCard key={index} {...service} />
                     ))}
