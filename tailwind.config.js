@@ -12,6 +12,7 @@ export default {
         'background-dark-deep': '#07051A',
         'surface-dark': '#2E2968',
         'surface-dark-elevated': '#1a1835',
+
         'charcoal': '#312773',
         'muted-beige': '#7B6FA0',
         'border-beige': '#D4CEF0',
@@ -28,8 +29,7 @@ export default {
         'lg': '0.5rem',
         'xl': '0.75rem',
         'full': '9999px'
-      },
-      animation: {
+      }, animation: {
         'shimmer': 'shimmer 3s ease-in-out infinite',
         'fadeInUp': 'fadeInUp 0.55s ease-out both',
         'fadeInUpSlow': 'fadeInUp 0.7s ease-out both',
