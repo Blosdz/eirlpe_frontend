@@ -1,13 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useCallback } from 'react';
 import Header from '../components/Header';
+import { useAuth } from '../context/AuthContext';
 import { useGoogleSignIn } from '../hooks/useGoogleSignIn';
+import { register } from '../api/auth';
+import type { ApiError } from '../api/client';
 
 export default function SignupPage() {
+    const navigate = useNavigate();
+    const { setUser } = useAuth();
     const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
     const [showPassword, setShowPassword] = useState(false);
     const [agreed, setAgreed] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleGoogleSuccess = useCallback((user: { email: string; name: string }, credential: string) => {
         setGoogleLoading(false);
@@ -28,10 +35,20 @@ export default function SignupPage() {
         form.password === form.confirmPassword &&
         agreed;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isValid) return;
-        alert(`Cuenta creada para ${form.email}`);
+        setError(null);
+        setLoading(true);
+        try {
+            const data = await register({ email: form.email, password: form.password, name: form.name.trim() });
+            setUser(data.user);
+            navigate('/', { replace: true });
+        } catch (err) {
+            setError((err as ApiError).message || 'No se pudo crear la cuenta. Revisa el backend.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -39,6 +56,11 @@ export default function SignupPage() {
             <Header />
             <main className="pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-8 lg:px-12 min-w-0">
                 <div className="mx-auto max-w-md min-w-0 w-full">
+                    {error && (
+                        <div className="mb-4 p-4 rounded-xl bg-red-500/10 dark:bg-red-500/20 border border-red-500/30 text-red-600 dark:text-red-400 text-sm">
+                            {error}
+                        </div>
+                    )}
                     <div className="text-center space-y-4 sm:space-y-5 mb-10 sm:mb-12">
                         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-charcoal dark:text-primary-bright leading-tight">
                             Crear <span className="italic font-normal">cuenta</span>
@@ -126,8 +148,8 @@ export default function SignupPage() {
                             </span>
                         </label>
 
-                        <button type="submit" disabled={!isValid} className="w-full py-4 sm:py-5 rounded-2xl bg-charcoal dark:bg-accent-light text-primary dark:text-charcoal font-bold text-base sm:text-lg tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-[0.99] disabled:opacity-30 disabled:cursor-not-allowed mt-4">
-                            Crear cuenta
+                        <button type="submit" disabled={!isValid || loading} className="w-full py-4 sm:py-5 rounded-2xl bg-charcoal dark:bg-accent-light text-primary dark:text-charcoal font-bold text-base sm:text-lg tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-[0.99] disabled:opacity-30 disabled:cursor-not-allowed mt-4">
+                            {loading ? 'Creando cuenta...' : 'Crear cuenta'}
                         </button>
                     </form>
 

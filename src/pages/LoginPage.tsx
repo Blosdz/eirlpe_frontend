@@ -1,13 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useCallback } from 'react';
 import Header from '../components/Header';
+import { useAuth } from '../context/AuthContext';
 import { useGoogleSignIn } from '../hooks/useGoogleSignIn';
+import { login } from '../api/auth';
+import type { ApiError } from '../api/client';
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+    const { setUser } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleGoogleSuccess = useCallback((user: { email: string; name: string }, credential: string) => {
         setGoogleLoading(false);
@@ -17,11 +24,20 @@ export default function LoginPage() {
 
     const { signIn: googleSignIn } = useGoogleSignIn(handleGoogleSuccess);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!email || !password) return;
-        // TODO: enviar al backend
-        alert(`Inicio de sesion con ${email}`);
+        setError(null);
+        setLoading(true);
+        try {
+            const data = await login(email, password);
+            setUser(data.user);
+            navigate('/', { replace: true });
+        } catch (err) {
+            setError((err as ApiError).message || 'No se pudo iniciar sesión. Revisa el backend.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -64,6 +80,11 @@ export default function LoginPage() {
                         <div className="flex-1 h-px bg-charcoal/10 dark:bg-primary/20" />
                     </div>
 
+                    {error && (
+                        <div className="mb-4 p-4 rounded-xl bg-red-500/10 dark:bg-red-500/20 border border-red-500/30 text-red-600 dark:text-red-400 text-sm">
+                            {error}
+                        </div>
+                    )}
                     {/* Formulario */}
                     <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                         <div className="space-y-2">
@@ -112,10 +133,10 @@ export default function LoginPage() {
 
                         <button
                             type="submit"
-                            disabled={!email || !password}
+                            disabled={!email || !password || loading}
                             className="w-full py-4 sm:py-5 rounded-2xl bg-charcoal dark:bg-accent-light text-primary dark:text-charcoal font-bold text-base sm:text-lg tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-[0.99] disabled:opacity-30 disabled:cursor-not-allowed"
                         >
-                            Iniciar sesion
+                            {loading ? 'Entrando...' : 'Iniciar sesion'}
                         </button>
                     </form>
 

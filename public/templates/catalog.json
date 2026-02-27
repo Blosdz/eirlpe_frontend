@@ -1,0 +1,14 @@
+[
+  {
+    "id": "plan-basico-opcion-1",
+    "name": "Plan Básico - Moderno",
+    "description": "Diseño limpio y moderno con gradientes. Ideal para consultores y profesionales independientes.",
+    "category": "Profesional"
+  },
+  {
+    "id": "plan-basico-opcion-2",
+    "name": "Plan Básico - Clásico",
+    "description": "Estilo clásico y profesional con tipografía serif. Perfecto para abogados, contadores y firmas.",
+    "category": "Corporativo"
+  }
+]

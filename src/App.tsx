@@ -10,6 +10,9 @@ import TemplateSelectorPage from './pages/TemplateSelectorPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import CuentaPage from './pages/CuentaPage';
+import MisDominiosPage from './pages/MisDominiosPage';
+import ActivadoPage from './pages/ActivadoPage';
 import './App.css';
 
 const lenisOptions = {
@@ -40,6 +43,9 @@ function App() {
                 <Route path="/registro/:domain/:template" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
+                <Route path="/cuenta" element={<CuentaPage />} />
+                <Route path="/mis-dominios" element={<MisDominiosPage />} />
+                <Route path="/activado" element={<ActivadoPage />} />
               </Routes>
             </div>
           </div>

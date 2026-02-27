@@ -22,7 +22,6 @@
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--eirl-charcoal) transparent;
-    overflow-x: hidden;
   }
   html.dark {
     scrollbar-color: var(--eirl-primary) transparent;
@@ -153,6 +152,35 @@
 }
 
 @layer utilities {
+  /* Bloque "Lo que ofrecemos": resplandor y borde difuminado */
+  .services-section-wrap {
+    overflow: visible;
+  }
+  .services-section-box {
+    position: relative;
+    isolation: isolate;
+  }
+  .services-section-box::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(91, 68, 242, 0.18) 0%, transparent 35%, transparent 65%, rgba(155, 133, 247, 0.12) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.9;
+  }
+  html.dark .services-section-box::before,
+  html[data-theme="dark"] .services-section-box::before {
+    background: linear-gradient(135deg, rgba(155, 133, 247, 0.2) 0%, transparent 40%, transparent 60%, rgba(91, 68, 242, 0.15) 100%);
+    opacity: 0.85;
+  }
+
   /* Áreas seguras para dispositivos con notch/home indicator */
   .pb-safe {
     padding-bottom: max(1.5rem, env(safe-area-inset-bottom));

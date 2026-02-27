@@ -21,7 +21,10 @@ export default function ServicesSection() {
 
     return (
         <section className="py-14 sm:py-20 md:py-24 lg:py-32 xl:py-40 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 transition-colors duration-500">
-            <div className="services-section-box mx-auto max-w-5xl lg:max-w-6xl rounded-2xl sm:rounded-3xl bg-background-light/90 dark:!bg-surface-dark-elevated backdrop-blur-[2px] shadow-xl shadow-charcoal/5 dark:shadow-black/20 dark:ring-1 dark:ring-primary/20 border border-charcoal/5 dark:!border-primary/20 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 transition-colors duration-500 min-w-0">
+            <div className="services-section-wrap relative mx-auto max-w-5xl lg:max-w-6xl">
+                {/* Resplandor difuminado detrás del bloque */}
+                <div className="services-section-glow absolute -inset-4 sm:-inset-6 md:-inset-8 rounded-3xl sm:rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br from-accent/20 via-accent/5 to-accent-light/15 dark:from-accent/25 dark:via-accent/10 dark:to-accent-light/20 blur-2xl sm:blur-3xl opacity-70 dark:opacity-60 pointer-events-none transition-opacity duration-500" aria-hidden />
+                <div className="services-section-box relative z-10 mx-auto max-w-5xl lg:max-w-6xl rounded-2xl sm:rounded-3xl bg-background-light/90 dark:!bg-surface-dark-elevated backdrop-blur-[2px] shadow-xl shadow-charcoal/5 dark:shadow-black/20 dark:ring-1 dark:ring-primary/20 border border-charcoal/5 dark:!border-primary/20 px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 transition-colors duration-500 min-w-0">
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 sm:gap-8 lg:gap-12 mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
                     <div className="min-w-0 max-w-2xl lg:max-w-3xl space-y-3 sm:space-y-4 md:space-y-6">
                         <h3 className="text-charcoal dark:!text-primary-bright uppercase tracking-[0.2em] text-xs sm:text-sm md:text-base font-bold">Lo que ofrecemos</h3>
@@ -38,6 +41,7 @@ export default function ServicesSection() {
                         <ServiceCard key={index} {...service} />
                     ))}
                 </div>
+            </div>
             </div>
         </section>
     );

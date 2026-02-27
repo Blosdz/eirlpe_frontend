@@ -1,12 +1,17 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Header from '../components/Header';
 import Stepper from '../components/Stepper';
+import { useAuth } from '../context/AuthContext';
 import { useGoogleSignIn } from '../hooks/useGoogleSignIn';
+import { register } from '../api/auth';
+import { createHostname } from '../api/hostnames';
+import type { ApiError } from '../api/client';
 
 export default function RegisterPage() {
     const { domain, template } = useParams<{ domain: string; template: string }>();
     const navigate = useNavigate();
+    const { user, setUser, loading: authLoading } = useAuth();
 
     const [form, setForm] = useState({
         name: '',
@@ -17,12 +22,52 @@ export default function RegisterPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [agreed, setAgreed] = useState(false);
     const [googleLoading, setGoogleLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [loadingStep, setLoadingStep] = useState<'account' | 'domain' | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const domainDisplay = domain ? `${domain}.eirl.pe` : '';
 
+    // Si el usuario ya está autenticado, activar el dominio directamente sin formulario
+    useEffect(() => {
+        if (authLoading || !user || !domain) return;
+
+        let cancelled = false;
+        setLoading(true);
+        setLoadingStep('domain');
+
+        createHostname(domain, template ?? undefined)
+            .then(() => {
+                if (!cancelled) {
+                    navigate('/activado', {
+                        replace: true,
+                        state: { domain: domainDisplay, template },
+                    });
+                }
+            })
+            .catch((err: ApiError) => {
+                if (!cancelled) {
+                    setLoading(false);
+                    setLoadingStep(null);
+                    // Si el dominio ya existe para este usuario, ir directo a /activado
+                    const msg = err.message?.toLowerCase() ?? '';
+                    if (msg.includes('ya existe') || msg.includes('already')) {
+                        navigate('/activado', {
+                            replace: true,
+                            state: { domain: domainDisplay, template },
+                        });
+                    } else {
+                        setError(err.message || 'No se pudo activar el dominio. Inténtalo de nuevo.');
+                    }
+                }
+            });
+
+        return () => { cancelled = true; };
+    }, [user, authLoading, domain, template, domainDisplay, navigate]);
+
+
     const handleGoogleSuccess = useCallback((user: { email: string; name: string }, credential: string) => {
         setGoogleLoading(false);
-        // TODO: enviar credential al backend para verificar y crear sesion
         console.log('Google sign-in:', user, credential);
         alert(`Bienvenido ${user.name} (${user.email})! Tu dominio ${domainDisplay} con template "${template}" sera activado.`);
     }, [domainDisplay, template]);
@@ -40,15 +85,68 @@ export default function RegisterPage() {
         form.password === form.confirmPassword &&
         agreed;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isValid) return;
-        // TODO: enviar al backend
-        alert(`Registro exitoso para ${domainDisplay} con template "${template}"`);
+        setError(null);
+        setLoading(true);
+
+        try {
+            // Paso 1: Crear cuenta
+            setLoadingStep('account');
+            const data = await register({
+                email: form.email,
+                password: form.password,
+                name: form.name.trim(),
+            });
+            setUser(data.user);
+
+            // Paso 2: Registrar dominio + crear BD tenant + guardar template
+            if (domain) {
+                setLoadingStep('domain');
+                await createHostname(domain, template ?? undefined);
+            }
+
+            // Éxito — ir a la página de confirmación / cuenta
+            navigate('/activado', {
+                replace: true,
+                state: {
+                    domain: domain ? `${domain}.eirl.pe` : '',
+                    template,
+                },
+            });
+        } catch (err) {
+            const msg = (err as ApiError).message || '';
+            if (msg.toLowerCase().includes('hostname') || msg.toLowerCase().includes('dominio')) {
+                setError('El dominio ya está registrado o no es válido. Vuelve atrás y elige otro.');
+            } else {
+                setError(msg || 'No se pudo completar el registro. Inténtalo de nuevo.');
+            }
+        } finally {
+            setLoading(false);
+            setLoadingStep(null);
+        }
     };
 
+    // Pantalla de carga mientras se activa el dominio para usuario ya logueado
+    if ((authLoading || (user && loading)) && !error) {
+        return (
+            <div className="min-h-screen min-h-[100dvh] bg-background-light dark:bg-transparent font-display text-charcoal dark:text-primary-bright transition-colors duration-500 flex flex-col items-center justify-center gap-6 px-4">
+                <div className="size-20 rounded-full bg-accent/10 dark:bg-accent-light/10 flex items-center justify-center animate-pulse">
+                    <span className="material-symbols-outlined text-4xl text-accent dark:text-accent-light">rocket_launch</span>
+                </div>
+                <div className="text-center space-y-2">
+                    <p className="text-xl sm:text-2xl font-bold text-charcoal dark:text-primary-bright">Activando tu dominio...</p>
+                    <p className="text-base text-muted-beige dark:text-primary-bright/80">
+                        Preparando <span className="font-semibold text-charcoal dark:text-primary-bright">{domainDisplay}</span>
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen min-h-[100dvh] bg-background-light dark:bg-transparent font-display text-charcoal dark:text-primary-bright-bright transition-colors duration-500 overflow-x-hidden">
+        <div className="min-h-screen min-h-[100dvh] bg-background-light dark:bg-transparent font-display text-charcoal dark:text-primary-bright transition-colors duration-500 overflow-x-hidden">
             <Header />
             <main className="pt-24 sm:pt-28 md:pt-32 lg:pt-36 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 min-w-0">
                 <div className="mx-auto max-w-xl min-w-0 w-full">
@@ -83,6 +181,11 @@ export default function RegisterPage() {
                         <span className="text-sm sm:text-base text-muted-beige dark:text-primary-bright/90 capitalize">{template}</span>
                     </div>
 
+                    {error && (
+                        <div className="mb-4 p-4 rounded-xl bg-red-500/10 dark:bg-red-500/20 border border-red-500/30 text-red-600 dark:text-red-400 text-sm">
+                            {error}
+                        </div>
+                    )}
                     {/* Boton Google */}
                     <button
                         type="button"
@@ -230,10 +333,12 @@ export default function RegisterPage() {
                         {/* Submit */}
                         <button
                             type="submit"
-                            disabled={!isValid}
+                            disabled={!isValid || loading}
                             className="w-full py-4 sm:py-5 rounded-2xl bg-accent dark:bg-accent-light text-white font-bold text-base sm:text-lg tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-[0.99] disabled:opacity-30 disabled:cursor-not-allowed mt-4 shadow-lg shadow-accent/25"
                         >
-                            Crear cuenta y activar dominio
+                            {loadingStep === 'account' && 'Creando cuenta...'}
+                            {loadingStep === 'domain' && 'Activando dominio...'}
+                            {!loadingStep && 'Crear cuenta y activar dominio'}
                         </button>
                     </form>
 

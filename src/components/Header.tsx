@@ -1,14 +1,29 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Header() {
     const { theme, toggleTheme } = useTheme();
+    const { user, logout, loading } = useAuth();
     const isDark = theme === 'dark';
     const [menuOpen, setMenuOpen] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
+
+    // Solo nombre de usuario: primera palabra del nombre o parte antes de @ del email
+    const displayName = (() => {
+        if (user?.name?.trim()) {
+            const firstWord = user.name.trim().split(/\s+/)[0];
+            if (firstWord) return firstWord;
+        }
+        if (user?.email) {
+            const beforeAt = user.email.split('@')[0];
+            if (beforeAt) return beforeAt;
+        }
+        return 'Usuario';
+    })();
 
     useEffect(() => {
         if (!menuOpen) return;
@@ -97,44 +112,94 @@ export default function Header() {
                             )}
                         </button>
 
-                        {/* Dropdown Comenzar */}
+                        {/* Dropdown usuario logueado o Comenzar */}
                         <div ref={menuRef} className="relative">
-                            <button
-                                onClick={() => setMenuOpen(!menuOpen)}
-                                className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center gap-2 rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-accent dark:bg-accent-light text-white text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark"
-                            >
-                                Comenzar
-                                <span className={`material-symbols-outlined text-lg transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}>
-                                    expand_more
-                                </span>
-                            </button>
-                            <div className={`absolute right-0 top-full mt-3 w-56 rounded-2xl border border-charcoal/10 dark:border-primary/30 bg-white dark:bg-surface-dark shadow-xl shadow-charcoal/10 dark:shadow-black/30 overflow-hidden transition-all duration-200 ease-out origin-top-right ${
-                                menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
-                            }`}>
-                                <Link
-                                    to="/login"
-                                    onClick={() => setMenuOpen(false)}
-                                    className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
-                                >
-                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">login</span>
-                                    <div>
-                                        <p className="text-sm font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
-                                        <p className="text-xs text-muted-beige dark:text-primary/70">Ya tengo una cuenta</p>
+                            {loading ? (
+                                <div className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-charcoal/10 dark:bg-primary/20 text-charcoal/50 dark:text-primary/70 text-sm">
+                                    ...
+                                </div>
+                            ) : user ? (
+                                <>
+                                    <button
+                                        onClick={() => setMenuOpen(!menuOpen)}
+                                        className="flex min-w-[140px] lg:min-w-[160px] max-w-[220px] items-center justify-center gap-2 rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-accent dark:bg-accent-light text-white text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark truncate"
+                                        title={displayName}
+                                    >
+                                        <span className="truncate">{displayName}</span>
+                                        <span className={`material-symbols-outlined text-lg shrink-0 transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}>
+                                            expand_more
+                                        </span>
+                                    </button>
+                                    <div className={`absolute right-0 top-full mt-3 w-56 rounded-2xl border border-charcoal/10 dark:border-primary/30 bg-white dark:bg-surface-dark shadow-xl shadow-charcoal/10 dark:shadow-black/30 overflow-hidden transition-all duration-200 ease-out origin-top-right ${
+                                        menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+                                    }`}>
+                                        <Link
+                                            to="/cuenta"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                                        >
+                                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person</span>
+                                            <p className="text-sm font-bold text-charcoal dark:text-primary">Mi cuenta</p>
+                                        </Link>
+                                        <Link
+                                            to="/mis-dominios"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                                        >
+                                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">dns</span>
+                                            <p className="text-sm font-bold text-charcoal dark:text-primary">Mis dominios</p>
+                                        </Link>
+                                        <div className="h-px bg-charcoal/5 dark:bg-primary/10 mx-4" />
+                                        <button
+                                            type="button"
+                                            onClick={() => { setMenuOpen(false); logout(); }}
+                                            className="flex w-full items-center gap-3 px-5 py-4 hover:bg-red-500/10 dark:hover:bg-red-500/20 transition-colors text-left"
+                                        >
+                                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">logout</span>
+                                            <p className="text-sm font-bold text-charcoal dark:text-primary">Cerrar sesión</p>
+                                        </button>
                                     </div>
-                                </Link>
-                                <div className="h-px bg-charcoal/5 dark:bg-primary/10 mx-4" />
-                                <Link
-                                    to="/signup"
-                                    onClick={() => setMenuOpen(false)}
-                                    className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
-                                >
-                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person_add</span>
-                                    <div>
-                                        <p className="text-sm font-bold text-charcoal dark:text-primary">Registrarse</p>
-                                        <p className="text-xs text-muted-beige dark:text-primary/70">Crear cuenta nueva</p>
+                                </>
+                            ) : (
+                                <>
+                                    <button
+                                        onClick={() => setMenuOpen(!menuOpen)}
+                                        className="flex min-w-[140px] lg:min-w-[160px] items-center justify-center gap-2 rounded-full h-12 lg:h-14 px-6 lg:px-8 bg-accent dark:bg-accent-light text-white text-sm lg:text-base font-bold tracking-[0.1em] uppercase transition-all duration-200 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent/25 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark"
+                                    >
+                                        Comenzar
+                                        <span className={`material-symbols-outlined text-lg transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}>
+                                            expand_more
+                                        </span>
+                                    </button>
+                                    <div className={`absolute right-0 top-full mt-3 w-56 rounded-2xl border border-charcoal/10 dark:border-primary/30 bg-white dark:bg-surface-dark shadow-xl shadow-charcoal/10 dark:shadow-black/30 overflow-hidden transition-all duration-200 ease-out origin-top-right ${
+                                        menuOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
+                                    }`}>
+                                        <Link
+                                            to="/login"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                                        >
+                                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">login</span>
+                                            <div>
+                                                <p className="text-sm font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
+                                                <p className="text-xs text-muted-beige dark:text-primary/70">Ya tengo una cuenta</p>
+                                            </div>
+                                        </Link>
+                                        <div className="h-px bg-charcoal/5 dark:bg-primary/10 mx-4" />
+                                        <Link
+                                            to="/signup"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="flex items-center gap-3 px-5 py-4 hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                                        >
+                                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person_add</span>
+                                            <div>
+                                                <p className="text-sm font-bold text-charcoal dark:text-primary">Registrarse</p>
+                                                <p className="text-xs text-muted-beige dark:text-primary/70">Crear cuenta nueva</p>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                            </div>
+                                </>
+                            )}
                         </div>
                     </nav>
 
@@ -156,13 +221,22 @@ export default function Header() {
                                 </svg>
                             )}
                         </button>
-                        <Link
-                            to="/login"
-                            className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/35 bg-background-light dark:bg-background-dark/95 text-charcoal dark:text-primary transition-all duration-500"
-                            aria-label="Iniciar sesion"
-                        >
-                            <span className="material-symbols-outlined text-2xl">person</span>
-                        </Link>
+                        {!loading && user ? (
+                            <div
+                                className="flex items-center justify-center min-h-11 sm:min-h-12 rounded-full border border-charcoal/15 dark:border-primary/35 bg-accent/20 dark:bg-accent/30 text-charcoal dark:text-primary font-bold text-xs px-3 max-w-[140px] truncate"
+                                title={displayName}
+                            >
+                                <span className="truncate">{displayName}</span>
+                            </div>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="flex items-center justify-center size-11 sm:size-12 rounded-full border border-charcoal/15 dark:border-primary/35 bg-background-light dark:bg-background-dark/95 text-charcoal dark:text-primary transition-all duration-500"
+                                aria-label="Iniciar sesion"
+                            >
+                                <span className="material-symbols-outlined text-2xl">person</span>
+                            </Link>
+                        )}
                         <button
                             type="button"
                             onClick={() => setMobileOpen(!mobileOpen)}
@@ -227,40 +301,72 @@ export default function Header() {
 
                     <div className="h-px bg-charcoal/10 dark:bg-primary/15 my-6" />
 
-                    <div className="flex flex-col gap-3">
-                        <Link
-                            to="/login"
-                            onClick={() => setMobileOpen(false)}
-                            className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">login</span>
-                            <div>
-                                <p className="text-base font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
-                                <p className="text-xs text-muted-beige dark:text-primary/70">Ya tengo una cuenta</p>
+                    {user ? (
+                        <div className="flex flex-col gap-2">
+                            <p className="px-4 py-2 text-sm text-muted-beige dark:text-primary/70 font-semibold uppercase tracking-wider">Cuenta</p>
+                            <p className="px-4 py-1 text-base font-bold text-charcoal dark:text-primary truncate" title={displayName}>{displayName}</p>
+                            <Link
+                                to="/cuenta"
+                                onClick={() => setMobileOpen(false)}
+                                className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                            >
+                                <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person</span>
+                                <p className="text-base font-bold text-charcoal dark:text-primary">Mi cuenta</p>
+                            </Link>
+                            <Link
+                                to="/mis-dominios"
+                                onClick={() => setMobileOpen(false)}
+                                className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                            >
+                                <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">dns</span>
+                                <p className="text-base font-bold text-charcoal dark:text-primary">Mis dominios</p>
+                            </Link>
+                            <button
+                                type="button"
+                                onClick={() => { setMobileOpen(false); logout(); }}
+                                className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-red-500/10 dark:hover:bg-red-500/20 transition-colors text-left w-full"
+                            >
+                                <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">logout</span>
+                                <p className="text-base font-bold text-charcoal dark:text-primary">Cerrar sesión</p>
+                            </button>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="flex flex-col gap-3">
+                                <Link
+                                    to="/login"
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                                >
+                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">login</span>
+                                    <div>
+                                        <p className="text-base font-bold text-charcoal dark:text-primary">Iniciar sesion</p>
+                                        <p className="text-xs text-muted-beige dark:text-primary/70">Ya tengo una cuenta</p>
+                                    </div>
+                                </Link>
+                                <Link
+                                    to="/signup"
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
+                                >
+                                    <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person_add</span>
+                                    <div>
+                                        <p className="text-base font-bold text-charcoal dark:text-primary">Registrarse</p>
+                                        <p className="text-xs text-muted-beige dark:text-primary/70">Crear cuenta nueva</p>
+                                    </div>
+                                </Link>
                             </div>
-                        </Link>
-                        <Link
-                            to="/signup"
-                            onClick={() => setMobileOpen(false)}
-                            className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-accent/5 dark:hover:bg-accent/10 transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-xl text-charcoal/50 dark:text-primary/80">person_add</span>
-                            <div>
-                                <p className="text-base font-bold text-charcoal dark:text-primary">Registrarse</p>
-                                <p className="text-xs text-muted-beige dark:text-primary/70">Crear cuenta nueva</p>
+                            <div className="mt-auto">
+                                <Link
+                                    to="/"
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl bg-accent dark:bg-accent-light text-white font-bold text-base tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-[0.98] shadow-lg shadow-accent/25"
+                                >
+                                    Comenzar
+                                </Link>
                             </div>
-                        </Link>
-                    </div>
-
-                    <div className="mt-auto">
-                        <Link
-                            to="/"
-                            onClick={() => setMobileOpen(false)}
-                            className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl bg-accent dark:bg-accent-light text-white font-bold text-base tracking-wider uppercase hover:opacity-90 transition-all duration-300 active:scale-[0.98] shadow-lg shadow-accent/25"
-                        >
-                            Comenzar
-                        </Link>
-                    </div>
+                        </>
+                    )}
                 </div>
             </div>
         </>
